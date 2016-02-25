@@ -16,8 +16,8 @@ module Lekanmastermind
 
     def process_mode
       case @player_mode.downcase
-      when 's', 'single' then Game.new(@message, @level, @player_mode).init_player
-      when 't', 'two' then Game.new(@message, @level, @player_mode).init_player
+      when 's', 'single' then Lekanmastermind::Game.new(@message, @level, @player_mode).init_player
+      when 't', 'two' then Lekanmastermind::Game.new(@message, @level, @player_mode).init_player
       when 'q', 'quit' then end_game
       else @message.error_input
       end

@@ -16,9 +16,9 @@ module Lekanmastermind
 
     def userlevel_process
       case @user_level.downcase
-      when 'b', 'beginner' then PlayMode.new(@messages, @user_level.downcase).select_mode
-      when 'i', 'intermediate' then PlayMode.new(@messages, @user_level.downcase).select_mode
-      when 'a', 'advanced' then PlayMode.new(@messages, @user_level.downcase).select_mode
+      when 'b', 'beginner' then Lekanmastermind::PlayMode.new(@messages, @user_level.downcase).select_mode
+      when 'i', 'intermediate' then Lekanmastermind::PlayMode.new(@messages, @user_level.downcase).select_mode
+      when 'a', 'advanced' then Lekanmastermind::PlayMode.new(@messages, @user_level.downcase).select_mode
       when 'q', 'quit' then end_game
       else @messages.error_input
       end

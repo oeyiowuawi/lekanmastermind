@@ -3,7 +3,7 @@ require_relative 'store_player_result'
 module Lekanmastermind
   class FileHandler
     def writer(name, guess, time, chance)
-      player_result = StorePlayerResult.new(name, guess, time, chance)
+      player_result = Lekanmastermind::StorePlayerResult.new(name, guess, time, chance)
       File.open('highscores.yaml', 'a') do |file|
         file.write(YAML.dump(player_result))
       end

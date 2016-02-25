@@ -15,10 +15,10 @@ module Lekanmastermind
       @player_name = gets.chomp
       @player1 = Players.new(@player_name)
       init_two_players if two_player?
-      input_handler = Logic.new(@message, @player1, @player2, two_player?, @level)
+      input_handler = Lekanmastermind::Logic.new(@message, @player1, @player2, two_player?, @level)
       input_handler.begin_game
     end
-    
+
     def init_two_players
       @message.prompt_for_player2_name
       @player2_name = gets.chomp

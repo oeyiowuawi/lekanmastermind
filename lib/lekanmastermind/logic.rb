@@ -11,7 +11,7 @@ module Lekanmastermind
       @player1 = player1
       @player2 = player2
       @two_players = mode
-      @comp_handler = Computer.new(@level)
+      @comp_handler = Lekanmastermind::Computer.new(@level)
       @computer_sequence = @comp_handler.computer_guess
     end
 
@@ -115,15 +115,15 @@ module Lekanmastermind
       time_elapsed = (end_time - @start_time).to_i
       @message.congratulatory_message(player, chances, time_elapsed)
       if yes_or_no?
-        FileHandler.new.writer(player.name, player.guess, time_elapsed, chances)
+        Lekanmastermind::FileHandler.new.writer(player.name, player.guess, time_elapsed, chances)
       end
-      FileHandler.new.print_top_scores(@message)
+      Lekanmastermind::FileHandler.new.print_top_scores(@message)
       replay
     end
 
     def replay
       @message.replay_option
-      yes_or_no? ? Interface.new.start_game : game_exit
+      yes_or_no? ? Lekanmastermind::Interface.new.start_game : game_exit
     end
 
     def yes_or_no?

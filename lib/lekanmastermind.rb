@@ -1,5 +1,5 @@
 require "lekanmastermind/version"
-require_relative 'newgame'
+require 'lekanmastermind/newgame'
 
 module Lekanmastermind
   class Mastermind
