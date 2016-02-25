@@ -1,4 +1,4 @@
-require_relative 'players'
+require_relative 'player'
 require_relative 'logic'
 module Lekanmastermind
   class Game
