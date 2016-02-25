@@ -1,4 +1,4 @@
-require 'i/o'
+require 'io/console'
 require_relative 'computer'
 require_relative 'filemanager'
 
