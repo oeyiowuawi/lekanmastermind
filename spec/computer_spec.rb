@@ -65,5 +65,10 @@ describe Lekanmastermind::Computer do
       expect(computer.generate_color_index.length).to eq(8)
     end
   end
+  describe "#computer_guess" do
+    it "returns String" do
+      expect(computer.computer_guess).to be_a(String)
+    end
+  end
 
 end

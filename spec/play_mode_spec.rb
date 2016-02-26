@@ -23,8 +23,6 @@ describe Lekanmastermind::PlayMode do
   end
   end
 
-
-
   describe "select_mode" do
     it {should respond_to(:select_mode)}
   end
