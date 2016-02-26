@@ -1,32 +1,31 @@
-require_relative 'level'
-require_relative 'messages'
-require_relative 'logic'
+
 module Lekanmastermind
   class Interface
+    include Lekanmastermind::Messages
     def initialize
-      @input = ''
-      @messages = Lekanmastermind::Messages.new
+      # @input = ''
     end
 
     def start_game
-      @messages.welcome_msg
+      welcome_msg
       loop do
-        player_option
+        # player_option gets.chomp.downcase
+        player_input = gets.chomp.downcase
+        player_option(player_input)
       end
     end
 
-    def player_option
-      @input = gets.chomp.downcase
-      case @input
-      when 'p' then Lekanmastermind::Level.new(@messages).select_level
-      when 'i' then @messages.instructions
+    def player_option(input)
+      case input
+      when 'p' then Lekanmastermind::Level.new.select_level
+      when 'i' then instructions
       when 'q' then quit
-      else @messages.error_input
+      else error_input_message
       end
     end
 
     def quit
-      @messages.goodbye
+      goodbye_message
       system(exit)
     end
   end

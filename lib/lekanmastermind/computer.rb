@@ -14,8 +14,7 @@ module Lekanmastermind
       case @level
       when 'b', 'beginner' then [4, 4]
       when 'i', 'intermediate' then [6, 5]
-      else
-        [8, 6]
+      when 'a', 'advanced' then [8, 6]
       end
     end
 

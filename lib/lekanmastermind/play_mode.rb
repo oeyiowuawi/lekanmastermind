@@ -1,30 +1,30 @@
-require_relative 'game'
+
 module Lekanmastermind
   class PlayMode
-    def initialize(message, level)
-      @message = message
+    include Messages
+    def initialize(level)
       @level = level
     end
 
     def select_mode
-      @message.select_play
+      select_play_message
       loop do
-        @player_mode = gets.chomp
-        process_mode
+        player_mode = gets.chomp
+        process_mode(player_mode.downcase)
       end
     end
 
-    def process_mode
-      case @player_mode.downcase
-      when 's', 'single' then Lekanmastermind::Game.new(@message, @level, @player_mode).init_player
-      when 't', 'two' then Lekanmastermind::Game.new(@message, @level, @player_mode).init_player
+    def process_mode(player_mode)
+      case player_mode
+      when 's', 'single' then Lekanmastermind::Game.new(@level, player_mode).init_player
+      when 't', 'two' then Lekanmastermind::Game.new(@level, player_mode).init_player
       when 'q', 'quit' then end_game
-      else @message.error_input
+      else error_input_message
       end
     end
 
     def end_game
-      @message.goodbye
+      goodbye_message
       system(exit)
     end
   end

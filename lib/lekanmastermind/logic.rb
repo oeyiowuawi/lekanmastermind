@@ -1,12 +1,9 @@
-require 'io/console'
-require_relative 'computer'
-require_relative 'filemanager'
 
 module Lekanmastermind
   class Logic
+    include Messages
     attr_reader :computer_sequence
-    def initialize(message, player1, player2, mode, level)
-      @message = message
+    def initialize(player1, player2, mode, level)
       @level = level
       @player1 = player1
       @player2 = player2
@@ -17,7 +14,7 @@ module Lekanmastermind
 
     def player_input(player)
       begin
-        @message.enter_input_guess(player.name)
+        enter_input_guess(player.name)
         player.guess = @two_players ? STDIN.noecho(&:gets).chomp : gets.chomp
         check_options(player)
       end while invalid_play(player)
@@ -67,7 +64,7 @@ module Lekanmastermind
     end
 
     def quit
-      @message.goodbye
+      goodbye_message
       system(exit)
     end
 
@@ -76,7 +73,7 @@ module Lekanmastermind
     end
 
     def begin_game
-      @message.level_welcome_message(@comp_handler)
+      level_welcome_message(@comp_handler)
       @start_time = Time.now
       chances = 1
       while chances < 13
@@ -101,28 +98,28 @@ module Lekanmastermind
     end
 
     def out_of_chance
-      @message.out_of_chance_msg
+      out_of_chance_msg
       replay
     end
 
     def game_exit
-      @message.goodbye
+      goodbye_message
       system(exit)
     end
 
     def congratulation(chances, player)
       end_time = Time.now
       time_elapsed = (end_time - @start_time).to_i
-      @message.congratulatory_message(player, chances, time_elapsed)
+      congratulatory_message(player, chances, time_elapsed)
       if yes_or_no?
         Lekanmastermind::FileHandler.new.writer(player.name, player.guess, time_elapsed, chances)
       end
-      Lekanmastermind::FileHandler.new.print_top_scores(@message)
+      Lekanmastermind::FileHandler.new.print_top_scores
       replay
     end
 
     def replay
-      @message.replay_option
+      replay_option_message
       yes_or_no? ? Lekanmastermind::Interface.new.start_game : game_exit
     end
 
@@ -132,7 +129,7 @@ module Lekanmastermind
         case input.downcase
         when 'y', 'yes' then return true
         when 'no', 'n' then return false
-        else @message.error_input
+        else error_input
         end
       end
     end
@@ -144,7 +141,7 @@ module Lekanmastermind
       exact_numb = exacts(combined_guesses)
       partial_numb = partials(combined_guesses)
       player.save_guess(guess.join, exact_numb, partial_numb)
-      @message.guess_process(guess.join, exact_numb, partial_numb, chances)
+      guess_process_message(guess.join, exact_numb, partial_numb, chances)
     end
 
     def exacts(combined_guesses)
