@@ -1,14 +1,24 @@
 require 'spec_helper'
-require 'pry'
-describe Lekanmastermind::Level do
-  subject(:level) {Lekanmastermind::Level.new(message)}
-  let(:message) {Lekanmastermind::Messages.new}
 
-  describe "#user_level_process" do
-    let(:user_level) {'b'}
-    it "points to the player mode class with the approprate level" do
-      binding.pry
-      expect(level.user_level_process(user_level)).to be_a(Lekanmastermind::PlayMode)
-    end
+describe Lekanmastermind::Level do
+  subject(:level) {Lekanmastermind::Level.new}
+
+  describe '#new' do
+  it 'creates an empty input string' do
+    expect(level.user_level).to eq('')
+  end
+  end
+
+
+  describe "user_level_process(user_level)" do
+    it {should respond_to(:user_level_process)}
+  end
+
+  context "select_level" do
+   it {should respond_to(:select_level)}
+  end
+
+  context "end_game" do
+   it {should respond_to(:end_game)}
   end
 end

@@ -2,7 +2,8 @@
 module Lekanmastermind
   class Level
     include Messages
-    def initialize()
+    attr_accessor :user_level
+    def initialize
       #@messages = message
       @user_level = ''
     end

@@ -2,6 +2,7 @@
 module Lekanmastermind
   class PlayMode
     include Messages
+    attr_reader :level
     def initialize(level)
       @level = level
     end

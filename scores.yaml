@@ -38,3 +38,8 @@ name: messi
 guess: gooy
 time: 42
 chances: 1
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: olalekan
+guess: gigb
+time: 6
+chances: 1
