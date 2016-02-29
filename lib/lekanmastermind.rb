@@ -1,4 +1,4 @@
-require "lekanmastermind/version"
+require 'lekanmastermind/version'
 require 'lekanmastermind/messages'
 require 'lekanmastermind/newgame'
 require 'lekanmastermind/level'

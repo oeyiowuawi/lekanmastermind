@@ -6,6 +6,7 @@ module Lekanmastermind
       @colors = %w(Red Blue Green Yellow Orange Indigo)
       @level_color = @colors.shuffle[0...number_of_color_and_character[1]]
     end
+
     def colours_for_level
       @level_color
     end

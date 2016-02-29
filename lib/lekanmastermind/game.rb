@@ -1,20 +1,20 @@
-
 module Lekanmastermind
   class Game
     include Messages
+    attr_accessor :player1, :player2
     def initialize(level, play_mode)
       @level = level
       @play_mode = play_mode
-      @player1 = nil
-      @player2 = nil
+      # @player1 = nil
+      # @player2 = nil
     end
 
     def init_player
       prompt_for_player1_name_message
-      @player_name = gets.chomp
-      @player1 = Players.new(@player_name)
+      player_name = gets.chomp
+      @player1 = Players.new(player_name)
       init_two_players if two_player?
-      input_handler = Lekanmastermind::Logic.new(@player1, @player2, two_player?, @level)
+      input_handler = Logic.new(@player1, @player2, two_player?, @level)
       input_handler.begin_game
     end
 
@@ -28,5 +28,4 @@ module Lekanmastermind
       @play_mode == 't' || @play_mode == 'two'
     end
   end
-
 end

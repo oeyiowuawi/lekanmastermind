@@ -2,7 +2,7 @@
 module Lekanmastermind
   class PlayMode
     include Messages
-    attr_reader :level
+    attr_accessor :level
     def initialize(level)
       @level = level
     end
@@ -17,8 +17,8 @@ module Lekanmastermind
 
     def process_mode(player_mode)
       case player_mode
-      when 's', 'single' then Lekanmastermind::Game.new(@level, player_mode).init_player
-      when 't', 'two' then Lekanmastermind::Game.new(@level, player_mode).init_player
+      when 's', 'single' then Game.new(@level, player_mode).init_player
+      when 't', 'two' then Game.new(@level, player_mode).init_player
       when 'q', 'quit' then end_game
       else error_input_message
       end
@@ -29,5 +29,4 @@ module Lekanmastermind
       system(exit)
     end
   end
-
 end

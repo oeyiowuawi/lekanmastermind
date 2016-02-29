@@ -16,5 +16,4 @@ module Lekanmastermind
       "#{name} solved '#{guess.upcase}' in #{chances} guess(es) over #{time / 60}m#{time}s"
     end
   end
-
 end

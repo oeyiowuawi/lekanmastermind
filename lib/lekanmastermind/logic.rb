@@ -8,7 +8,7 @@ module Lekanmastermind
       @player1 = player1
       @player2 = player2
       @two_players = mode
-      @comp_handler = Lekanmastermind::Computer.new(@level)
+      @comp_handler = Computer.new(@level)
       @computer_sequence = @comp_handler.computer_guess
     end
 
@@ -32,7 +32,7 @@ module Lekanmastermind
     def check_options(player)
       case player.guess
       when 'c', 'C' then cheat
-      when 'q', 'Q' then quit
+      when 'q', 'Q' then game_exit
       when 'h', 'H' then print_history(player)
       else input_length_check(player.guess)
       end
@@ -61,11 +61,6 @@ module Lekanmastermind
 
     def won?(player)
       player.guess == computer_sequence
-    end
-
-    def quit
-      goodbye_message
-      system(exit)
     end
 
     def cheat
@@ -129,7 +124,7 @@ module Lekanmastermind
         case input.downcase
         when 'y', 'yes' then return true
         when 'no', 'n' then return false
-        else error_input
+        else error_input_message
         end
       end
     end
@@ -164,6 +159,6 @@ module Lekanmastermind
       end
       partial_match.size
     end
+    
   end
-
 end

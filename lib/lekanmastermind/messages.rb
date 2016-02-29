@@ -38,10 +38,10 @@ module Lekanmastermind
     end
 
     def congratulatory_message(player, trial, time)
-        puts "Congratulation #{player.name}!! You guessed the correct
-        sequence '#{player.guess}' in #{trial} trial(s) over #{time / 3600}hrs
-        #{time / 60} min #{time % 60} secs."
-        puts 'Do you want to save your record? y/n'
+      puts "Congratulation #{player.name}!! You guessed the correct
+      sequence '#{player.guess}' in #{trial} trial(s) over #{time / 3600}hrs
+      #{time / 60} min #{time % 60} secs."
+      puts 'Do you want to save your record? y/n'
     end
 
     def replay_option_message
@@ -70,4 +70,4 @@ module Lekanmastermind
       puts 'Thanks for playing Master Mind. See you soon'
     end
   end
- end
+end

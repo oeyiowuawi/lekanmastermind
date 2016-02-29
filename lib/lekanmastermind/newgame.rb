@@ -29,5 +29,4 @@ module Lekanmastermind
       system(exit)
     end
   end
-
 end
