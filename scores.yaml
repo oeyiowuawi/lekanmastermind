@@ -318,3 +318,8 @@ name: Lekan
 guess: ioyb
 time: 120
 chances: 5
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: Lekan
+guess: ioyb
+time: 120
+chances: 5
