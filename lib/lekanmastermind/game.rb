@@ -3,10 +3,8 @@ module Lekanmastermind
     include Messages
     attr_accessor :player1, :player2
     def initialize(level, play_mode)
-      @level = level
-      @play_mode = play_mode
-      # @player1 = nil
-      # @player2 = nil
+       @level = level
+       @play_mode = play_mode
     end
 
     def init_player

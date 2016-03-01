@@ -4,9 +4,7 @@ module Lekanmastermind
     include Messages
     attr_accessor :user_level
     def initialize
-      # @messages = message
       @user_level = ''
-      # @play = PlayMode.new
     end
 
     def select_level
@@ -14,7 +12,8 @@ module Lekanmastermind
       loop do
         @user_level = gets.chomp.downcase
         user_level_process(@user_level)
-        break
+        error_input_message
+        # break
       end
     end
 
@@ -25,7 +24,6 @@ module Lekanmastermind
       when 'i', 'intermediate' then PlayMode.new(user_level).select_mode
       when 'a', 'advanced' then PlayMode.new(user_level).select_mode
       when 'q', 'quit' then end_game
-      else error_input_message
       end
     end
 

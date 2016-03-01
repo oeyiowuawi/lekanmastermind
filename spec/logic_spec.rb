@@ -4,11 +4,18 @@ describe Lekanmastermind::Logic do
   subject(:logic) { Lekanmastermind::Logic.new(player1, player2, mode, level) }
   let(:player1)  { Lekanmastermind::Players.new('lekan') }
   let(:player2)  { Lekanmastermind::Players.new('lateef') }
-  let(:mode) { 'two' }
-  let(:level) { 'i' }
+  let(:file)  { Lekanmastermind::FileHandler.new }
+  let(:mode) { true }
+  let(:level) { 'b' }
 
   describe '#player_input(player)' do
     it { should respond_to(:player_input) }
+    it "accepts player valid input" do
+      STDIN.stub(:noecho).and_return('rrrr')
+      allow(logic).to receive(:check_options).and_return(nil)
+      expect(logic.player_input(player1)).to eq(nil)
+    end
+
   end
 
   describe '#input_length_check(guess)' do
@@ -46,9 +53,23 @@ describe Lekanmastermind::Logic do
       allow(logic).to receive(:game_exit).and_return(nil)
       expect(logic.check_options(player1)).to eq(nil)
     end
+    it "prints Hitory" do
+      allow(player1).to receive(:guess).and_return('H')
+      allow(logic).to receive(:print_history).and_return(nil)
+      expect(logic.check_options(player1)).to eq(nil)
+    end
+    it "prints the appropriate error message depending on the length of the input" do
+      allow(player1).to receive(:guess).and_return('z')
+      allow(logic).to receive(:input_length_check).and_return(nil)
+      expect(logic.check_options(player1)).to eq(nil)
+    end
   end
   describe '#invalid_play(player)' do
     it { should respond_to(:invalid_play) }
+    it "returns true for invalid input" do
+      allow(player1).to receive(:guess).and_return('1ty')
+      expect(logic.invalid_play(player1)).to eq(true)
+    end
   end
   describe '#not_letters?(guess)' do
     let(:guess) {"1rrb"}
@@ -74,6 +95,10 @@ describe Lekanmastermind::Logic do
   end
   describe '#print_history(player)' do
     it { should respond_to(:print_history) }
+    it "prints the player History" do
+      allow(player1).to receive(:show_history).and_return('rrbo -- 2 eaxcts, 1 partials')
+      expect(logic.print_history(player1)).to eq('rrbo -- 2 eaxcts, 1 partials')
+    end
   end
   describe '#won?(player)' do
     it { should respond_to(:won?) }
@@ -93,13 +118,40 @@ describe Lekanmastermind::Logic do
     end
   end
   describe '#begin_game' do
+    #let(chances) {13}
     it { should respond_to(:begin_game) }
+=begin
+    it "quits the game when the chance is greater than 12" do
+      allow(logic).to receive(:puts).and_return(nil)
+      allow(logic).to receive(:chances).and_return(12)
+      allow(logic).to receive(:player_check).and_return(nil)
+      expect(logic.begin_game).to include('GAME OVER!!')
+    end
+=end
   end
   describe '#player_check(chances)' do
+    let(:chances) {3}
     it { should respond_to(:player_check) }
+    it "checks players guesses" do
+      allow(logic).to receive(:winning_player).and_return(nil)
+      expect(logic.player_check(chances)).to eq(nil)
+    end
   end
   describe '#winning_player(player, chances)' do
+    let(:chances) {2}
     it { should respond_to(:winning_player) }
+    it 'checks if a player wins' do
+      allow(logic).to receive(:player_input).and_return('rrby')
+      allow(logic).to receive(:won?).and_return(true)
+      allow(logic).to receive(:congratulation).and_return(nil)
+      expect(logic.winning_player(player1, chances)).to eq(nil)
+    end
+    it "process a player's guess" do
+      allow(logic).to receive(:player_input).and_return('rrby')
+      allow(logic).to receive(:won?).and_return(false)
+      allow(logic).to receive(:process_guess).and_return(nil)
+      expect(logic.winning_player(player1, chances)).to eq(nil)
+    end
   end
   describe '#out_of_chance' do
     it { should respond_to(:out_of_chance) }
@@ -119,7 +171,22 @@ describe Lekanmastermind::Logic do
   end
 
   describe '#congratulation(chances, player)' do
+     let(:chances) {5}
+    # let(:start_time) {1456853898}
+    # let(:end_time) {1456854156}
+    # let(:time_elapsed) {258}
     it { should respond_to(:congratulation) }
+=begin
+    it "should congratulate player and then print top score and exit"do
+    require 'pry'; binding.pry
+      allow(logic).to receive(:congratulatory_message).and_return(nil)
+      allow(logic).to receive(:yes_or_no?).and_return(true)
+      allow(file).to receive(:writer).and_return(nil)
+      allow(file).to receive(:print_top_scores).and_return(nil)
+      allow(logic).to receive(:replay).and_return(nil)
+      expect(logic.congratulation(chances, player1)).to eq(nil)
+    end
+=end
   end
 
   describe '#replay' do

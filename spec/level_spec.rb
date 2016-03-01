@@ -29,14 +29,15 @@ end
 end
   context 'select_level' do
     it { should respond_to(:select_level) }
-
+=begin
     it "should select the level and pass the parameter to the appropriate class " do
+      allow(level).to receive(:puts).and_return()
       allow(level).to receive(:puts).and_return(nil)
-      allow(level).to receive(:gets).and_return('b')
+      allow(level).to receive(:gets).and_return('c')
       allow(level).to receive(:user_level_process).and_return(nil)
       expect(level.select_level).to eq(nil)
     end
-
+=end
   end
 
   context 'end_game' do
@@ -46,4 +47,14 @@ end
       expect{level.end_game}.to raise_error SystemExit
     end
   end
+=begin
+  context 'wrong_entry' do
+    it { should respond_to(:select_level) }
+    it "read wrong input message" do
+      require "pry"; binding.pry
+      allow(level).to receive(:gets).and_return("c")
+      expect(level.select_level).to include "invalid letter"
+    end
+  end
+=end
 end

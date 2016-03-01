@@ -1,4 +1,6 @@
 
+# This class controls all the logic in the game
+# it checks the guesses againt computer's and return the appropriate response
 module Lekanmastermind
   class Logic
     include Messages
@@ -10,14 +12,16 @@ module Lekanmastermind
       @two_players = mode
       @comp_handler = Computer.new(@level)
       @computer_sequence = @comp_handler.computer_guess
+      @file_handler = Lekanmastermind::FileHandler.new
     end
 
     def player_input(player)
-      begin
+      loop do
         enter_input_guess(player.name)
         player.guess = @two_players ? STDIN.noecho(&:gets).chomp : gets.chomp
         check_options(player)
-      end while invalid_play(player)
+        break unless invalid_play(player)
+      end
     end
 
     def input_length_check(guess)
@@ -107,9 +111,9 @@ module Lekanmastermind
       time_elapsed = (end_time - @start_time).to_i
       congratulatory_message(player, chances, time_elapsed)
       if yes_or_no?
-        Lekanmastermind::FileHandler.new.writer(player.name, player.guess, time_elapsed, chances)
+        @file_handler.writer(player.name, player.guess, time_elapsed, chances)
       end
-      Lekanmastermind::FileHandler.new.print_top_scores
+      @file_handler.print_top_scores
       replay
     end
 
@@ -159,6 +163,5 @@ module Lekanmastermind
       end
       partial_match.size
     end
-    
   end
 end

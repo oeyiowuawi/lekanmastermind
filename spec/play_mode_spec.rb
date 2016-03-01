@@ -5,6 +5,7 @@ describe Lekanmastermind::PlayMode do
   let(:level) { 'b' }
 
   describe '#new' do
+    let(:level) {'b'}
     it 'creates an empty input string' do
       expect(play_mode.level).to eq('b')
     end
@@ -34,7 +35,9 @@ describe Lekanmastermind::PlayMode do
   end
 =end
   context 'process_mode(player_mode)' do
+    let(:player_mode){'s'}
     it { should respond_to(:process_mode) }
+
   end
 
   context 'end_game' do

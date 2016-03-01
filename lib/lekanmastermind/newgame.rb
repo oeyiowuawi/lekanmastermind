@@ -3,7 +3,7 @@ module Lekanmastermind
   class Interface
     include Lekanmastermind::Messages
     def initialize
-      # @input = ''
+      @level = Lekanmastermind::Level.new
     end
 
     def start_game
@@ -17,7 +17,7 @@ module Lekanmastermind
 
     def player_option(input)
       case input
-      when 'p' then Lekanmastermind::Level.new.select_level
+      when 'p' then @level.select_level
       when 'i' then instructions
       when 'q' then quit
       else error_input_message
