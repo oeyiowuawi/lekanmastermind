@@ -20,9 +20,9 @@ module Lekanmastermind
     def user_level_process(user_level)
       # binding.pry
       case user_level
-      when 'b', 'beginner' then PlayMode.new(user_level).select_mode
-      when 'i', 'intermediate' then PlayMode.new(user_level).select_mode
-      when 'a', 'advanced' then PlayMode.new(user_level).select_mode
+      when 'b', 'beginner' then PlayMode.new(user_level).process_mode
+      when 'i', 'intermediate' then PlayMode.new(user_level).process_mode
+      when 'a', 'advanced' then PlayMode.new(user_level).process_mode
       when 'q', 'quit' then end_game
       end
     end

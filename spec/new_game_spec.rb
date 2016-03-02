@@ -25,7 +25,7 @@ let(:level){Lekanmastermind::Level.new}
   context '#quit' do
     it "fghjk" do
     allow(interface).to receive(:puts).and_return(nil)
-    allow(interface).to receive(:gets)
+    #allow(interface).to receive(:gets)
     expect{interface.quit}.to raise_error SystemExit
       end
   end

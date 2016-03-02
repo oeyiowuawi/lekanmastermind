@@ -33,12 +33,17 @@ describe Lekanmastermind::PlayMode do
       expect(play_mode.select_mode).to eq(nil)
     end
   end
-=end
   context 'process_mode(player_mode)' do
-    let(:player_mode){'s'}
+    #let(:player_mode){'s'}
     it { should respond_to(:process_mode) }
+    it "" do
+      allow(play_mode).to receive(:gets).and_return('s')
+      allow(Lekanmastermind::Game.new(level, "s")).to receive(:init_player).and_return(nil)
+      expect(play_mode.process_mode).to be nil
+    end
 
   end
+=end
 
   context 'end_game' do
     it { should respond_to(:end_game) }

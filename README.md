@@ -1,10 +1,15 @@
-# Lekanmastermind
+**Lekanmastermind**
+===================
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/lekanmastermind`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+Welcome to mastermind. This is a classic code breaking game between two players. In this implementation, It is between a player and the computer.
+The player selects the level(Beginner, Intermediate and Advanced) in which He/She wants to play and the computer generates Colour sequence based on the level chosen. The game is won when a player correctly guesses the computer sequence or the player runs out of guesses: there are 12 guesses for a player.
 
-## Installation
+----------
+
+
+**Installation**
+-------------
 
 Add this line to your application's Gemfile:
 
@@ -19,18 +24,30 @@ And then execute:
 Or install it yourself as:
 
     $ gem install lekanmastermind
+## **Usage**
 
-## Usage
+To play the game, open your terminal and run lekanmastermind. Once the game loads up, You can select play or read Instructions.
 
-TODO: Write usage instructions here
+A random code of varying length is generated depending on the level selected by the player(Duplicates are allowed).
 
-## Development
+You have twelve guesses per game.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+On every guess, you are presented with a message identifying the number of elements you got correctly, and number of colours you got correctly but are in different positions.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To view entry history, enter h or history at any time. To view sequence generated, enter c or cheat at any time To quit the game at any point enter q or quit.
+
+After the game is over or won, The top ten players and the time it tok them to guess the sequence corectly is displayed.
+
+## **Development**
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/lekanmastermind` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/lekanmastermind.
-
+1. Fork it ( https://github.com/andela-oeyiowuawi/lekanmastermind/fork)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
