@@ -1,4 +1,4 @@
-**Lekanmastermind** [![Coverage Status](https://coveralls.io/repos/github/andela-oeyiowuawi/lekanmastermind/badge.svg?branch=master)](https://coveralls.io/github/andela-oeyiowuawi/lekanmastermind?branch=master)  [![Circle CI](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind.svg?style=svg)](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind)
+**Lekanmastermind** [![Coverage Status](https://coveralls.io/repos/github/andela-oeyiowuawi/lekanmastermind/badge.svg?branch=master)](https://coveralls.io/github/andela-oeyiowuawi/lekanmastermind?branch=master)  [![Circle CI](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind.svg?style=svg)](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind) 
 ===================
 
 
