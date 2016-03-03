@@ -6,7 +6,7 @@ module Lekanmastermind
     end
 
     def instructions
-      puts 'You know waht to do. You just want me to fucking teeyu'
+      puts 'You know waht to do. You just want me to fucking teeyu. enter menu to go back to the menu'
     end
 
     def error_input_message
@@ -14,8 +14,8 @@ module Lekanmastermind
     end
 
     def select_level_message
-      puts "Select Your preferred level of difficulty. You can select (b)eginner,
-      (i)ntermediate or (a)dvance"
+      puts "Select Your preferred level of difficulty. Enter b  for beginner, i
+      for intermediate or a  for advance"
     end
 
     def prompt_for_player1_name_message

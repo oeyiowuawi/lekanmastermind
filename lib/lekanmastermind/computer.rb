@@ -2,7 +2,7 @@ module Lekanmastermind
   class Computer
     attr_accessor :level
     def initialize(level)
-      @level = level
+      @level = level.to_s
       @colors = %w(Red Blue Green Yellow Orange Indigo)
       @level_color = @colors.shuffle[0...number_of_color_and_character[1]]
     end
@@ -13,9 +13,9 @@ module Lekanmastermind
 
     def number_of_color_and_character
       case @level
-      when 'b', 'beginner' then [4, 4]
-      when 'i', 'intermediate' then [6, 5]
-      when 'a', 'advanced' then [8, 6]
+      when  'beginner' then [4, 4]
+      when  'intermediate' then [6, 5]
+      when  'advanced' then [8, 6]
       end
     end
 

@@ -1,35 +1,29 @@
 
 # This class controls all the logic in the game
 # it checks the guesses againt computer's and return the appropriate response
+require_relative 'game_methods'
 module Lekanmastermind
-  class Logic
+  class GameEngine
     include Messages
+    include GameInitializer
+    include GameMethods
     attr_reader :computer_sequence
-    def initialize(player1, player2, mode, level)
-      @level = level
-      @player1 = player1
-      @player2 = player2
-      @two_players = mode
-      @comp_handler = Computer.new(@level)
-      @computer_sequence = @comp_handler.computer_guess
-      @file_handler = Lekanmastermind::FileHandler.new
+
+    def game_menu
+      welcome_msg
+      action = gets.chomp
+      @game_level = player_action(action)
+      @mode = load_mode
+      init_player
+      begin_game
     end
 
     def player_input(player)
       loop do
         enter_input_guess(player.name)
-        player.guess = @two_players ? STDIN.noecho(&:gets).chomp : gets.chomp
+        player.guess = two_players? ? STDIN.noecho(&:gets).chomp : gets.chomp
         check_options(player)
         break unless invalid_play(player)
-      end
-    end
-
-    def input_length_check(guess)
-      character_count = computer_sequence.length
-      if guess.length > character_count
-        puts "Your guess is longer than the required length(#{character_count})"
-      elsif guess.length < computer_sequence.length
-        puts "Your guess is shorter than the required length(#{character_count})"
       end
     end
 
@@ -42,37 +36,8 @@ module Lekanmastermind
       end
     end
 
-    def invalid_play(player)
-      not_letters?(player.guess) || !validate_number_of_characters(player.guess)
-    end
-
-    def not_letters?(guess)
-      trimmed_guess = guess.strip
-      true if /[^a-z]/ =~ trimmed_guess
-    end
-
-    def comp_number_characters
-      computer_sequence.length
-    end
-
-    def validate_number_of_characters(guess)
-      guess.length == comp_number_characters
-    end
-
-    def print_history(player)
-      player.show_history
-    end
-
-    def won?(player)
-      player.guess == computer_sequence
-    end
-
-    def cheat
-      puts computer_sequence
-    end
-
     def begin_game
-      level_welcome_message(@comp_handler)
+      begin_game_initialize
       @start_time = Time.now
       chances = 1
       while chances < 13
@@ -84,7 +49,7 @@ module Lekanmastermind
 
     def player_check(chances)
       winning_player(@player1, chances)
-      winning_player(@player2, chances) if @two_players
+      winning_player(@player2, chances) if two_players?
     end
 
     def winning_player(player, chances)
@@ -96,16 +61,6 @@ module Lekanmastermind
       end
     end
 
-    def out_of_chance
-      out_of_chance_msg
-      replay
-    end
-
-    def game_exit
-      goodbye_message
-      system(exit)
-    end
-
     def congratulation(chances, player)
       end_time = Time.now
       time_elapsed = (end_time - @start_time).to_i
@@ -115,22 +70,6 @@ module Lekanmastermind
       end
       @file_handler.print_top_scores
       replay
-    end
-
-    def replay
-      replay_option_message
-      yes_or_no? ? Lekanmastermind::Interface.new.start_game : game_exit
-    end
-
-    def yes_or_no?
-      loop do
-        input = gets.chomp
-        case input.downcase
-        when 'y', 'yes' then return true
-        when 'no', 'n' then return false
-        else error_input_message
-        end
-      end
     end
 
     def process_guess(player, chances)

@@ -1,21 +1,18 @@
 require 'lekanmastermind/version'
 require 'lekanmastermind/messages'
-require 'lekanmastermind/newgame'
-require 'lekanmastermind/level'
-require 'lekanmastermind/logic'
-require 'lekanmastermind/play_mode'
-require 'lekanmastermind/game'
+require 'lekanmastermind/game_engine'
+require 'lekanmastermind/game_methods'
 require 'lekanmastermind/player'
-require 'io/console'
 require 'lekanmastermind/computer'
 require 'lekanmastermind/filemanager'
-require 'yaml'
+require 'io/console'
 require 'lekanmastermind/store_player_result'
+require 'yaml'
 
 module Lekanmastermind
   class Mastermind
     def initialize
-      Lekanmastermind::Interface.new.start_game
+      Lekanmastermind::GameEngine.new.game_menu
     end
   end
 end
