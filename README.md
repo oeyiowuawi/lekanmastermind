@@ -1,4 +1,4 @@
-**Lekanmastermind**  [![Circle CI](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind.svg?style=svg)](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind) [![Coverage Status](https://coveralls.io/repos/github/andela-oeyiowuawi/lekanmastermind/badge.svg?branch=master)](https://coveralls.io/github/andela-oeyiowuawi/lekanmastermind?branch=master)  [![Code Climate](https://codeclimate.com/github/andela-oeyiowuawi/lekanmastermind/badges/gpa.svg)](https://codeclimate.com/github/andela-oeyiowuawi/lekanmastermind)
+**Lekanmastermind**  [![Code Climate](https://codeclimate.com/github/andela-oeyiowuawi/lekanmastermind/badges/gpa.svg)](https://codeclimate.com/github/andela-oeyiowuawi/lekanmastermind)  [![Circle CI](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind.svg?style=svg)](https://circleci.com/gh/andela-oeyiowuawi/lekanmastermind) [![Coverage Status](https://coveralls.io/repos/github/andela-oeyiowuawi/lekanmastermind/badge.svg?branch=master)](https://coveralls.io/github/andela-oeyiowuawi/lekanmastermind?branch=master)  
 ===================
 
 
