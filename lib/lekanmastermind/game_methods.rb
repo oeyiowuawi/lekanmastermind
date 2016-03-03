@@ -1,6 +1,6 @@
 module Lekanmastermind
-  class Game
-    include Messages
+  module GameMethods
+    include Lekanmastermind::Messages
     def yes_or_no?
       loop do
         input = gets.chomp
@@ -61,6 +61,5 @@ module Lekanmastermind
     def validate_number_of_characters(guess)
       guess.length == comp_number_characters
     end
-
   end
 end

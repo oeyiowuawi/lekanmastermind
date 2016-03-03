@@ -2,11 +2,12 @@
 # This class controls all the logic in the game
 # it checks the guesses againt computer's and return the appropriate response
 require_relative 'game_methods'
+require_relative 'game_initializer'
 module Lekanmastermind
   class GameEngine
-    include Messages
-    include GameInitializer
-    include GameMethods
+    include Lekanmastermind::Messages
+    include Lekanmastermind::GameInitializer
+    include Lekanmastermind::GameMethods
     attr_reader :computer_sequence
 
     def game_menu
