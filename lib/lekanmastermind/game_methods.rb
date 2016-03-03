@@ -11,6 +11,7 @@ module Lekanmastermind
         end
       end
     end
+
     def replay
       replay_option_message
       yes_or_no? ? game_menu : game_exit
@@ -20,10 +21,12 @@ module Lekanmastermind
       goodbye_message
       system(exit)
     end
+
     def out_of_chance
       out_of_chance_msg
       replay
     end
+
     def input_length_check(guess)
       character_count = computer_sequence.length
       if guess.length > character_count

@@ -7,7 +7,6 @@ module Lekanmastermind
     include Lekanmastermind::Messages
     include Lekanmastermind::GameMethods
     attr_reader :mode
-    
     def begin_game_initialize
       computer_handler = Computer.new(@game_level)
       @computer_sequence = computer_handler.computer_guess
@@ -18,7 +17,7 @@ module Lekanmastermind
     def player_action(select_action)
       if supported_actions.include? select_action
         send(supported_actions[select_action])
-      elsif select_action == "q" || select_action == "quit"
+      elsif select_action == 'q' || select_action == 'quit'
         game_exit
       else
         error_input_message
@@ -28,16 +27,17 @@ module Lekanmastermind
 
     def supported_actions
       {
-        "p" => :select_level,
-        "i" => :load_instructions,
-        "instruction" => :load_instructions,
-        "play" => :select_level
+        'p' => :select_level,
+        'i' => :load_instructions,
+        'instruction' => :load_instructions,
+        'play' => :select_level
       }
     end
+        
     def load_instructions
       instructions
       response = gets.chomp.downcase
-      game_menu if response == "menu"
+      game_menu if response == 'menu'
       game_exit
     end
 
@@ -49,10 +49,10 @@ module Lekanmastermind
 
     def game_level(level)
       case level
-      when 'a','advanced' then :advanced
-      when 'b','beginner' then :beginner
-      when 'i','intermediate' then :intermediate
-      when 'q','quit' then game_exit
+      when 'a', 'advanced' then :advanced
+      when 'b', 'beginner' then :beginner
+      when 'i', 'intermediate' then :intermediate
+      when 'q', 'quit' then game_exit
       else :beginner
       end
     end
@@ -61,9 +61,9 @@ module Lekanmastermind
       select_play_message
       mode = gets.chomp.downcase
       case mode
-      when 's','single' then 'single'
+      when 's', 'single' then 'single'
       when 'm', 'multiplayer' then 'multiplayer'
-      when 'q', 'quit' then  game_exit
+      when 'q', 'quit' then game_exit
       else
         error_input_message
         load_mode

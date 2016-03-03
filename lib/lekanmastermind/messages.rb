@@ -3,7 +3,7 @@ module Lekanmastermind
     def welcome_msg
       puts 'Welcome to mastermind. Would you like to (p)lay, read the (i)nstructions or (q)uit?'
 
-     puts  <<-EOS
+      puts <<-EOS
                *************************************************
                *           Welcome to mastermind               *
                *                                               *
@@ -12,32 +12,28 @@ module Lekanmastermind
                *       Press (q)uit to quit the game at anytime*
                *                                               *
                *************************************************
-     EOS
-     print '>'
+          EOS
+      print '>'
     end
 
     def instructions
-      #puts 'You know waht to do. You just want me to fucking teeyu. enter menu to go back to the menu'
-
-    puts  <<-EOS
+    puts <<-EOS
                **************************************************
                *      This is MASTERMIND game v0.1.0            *
                *            By Olalekan Eyiowuawi               *
                *      Enjoy and expect the next version         *
                *      Press q at anytime to quit the game.      *
-               *      You will be prompted to save a started... *
                *      Enter your level and play mode            *
                *   b - beginner, i - intermediate, a - advanced *
-               *   To view guess history, enter h at any time.  *
-               *      ... games by uisng your username.         *
+               *   To view guess history, enter h at any time   *
+               *      when the game starts                      *
                *      Press Menu to go back to the menu.        *
                **************************************************
-     EOS
+        EOS
     end
 
     def error_input_message
-
-    puts  <<-EOS
+    puts <<-EOS
                 ************************************************************************
                 * You've entered an invalid letter. Read the instruction and try again *
                 ************************************************************************
@@ -45,7 +41,7 @@ module Lekanmastermind
     end
 
     def select_level_message
-    puts  <<-EOS
+    puts <<-EOS
                 *********************************************************
                 *       Select Your preferred level of difficulty       *
                 *          Enter b  for beginner                        *
@@ -69,18 +65,20 @@ module Lekanmastermind
 
     def level_welcome_message(comp_handler)
       puts "You are playing the #{comp_handler.level} level.
-          You can choose #{comp_handler.number_of_color_and_character[0]} colors from
-          the following colors: #{comp_handler.colours_for_level} To enter a sequence,
+          You can choose #{comp_handler.number_of_color_and_character[0]}
+          colors from the following colors: #{comp_handler.colours_for_level}
+          To enter a sequence,
           Enter just the first letters of your  color sequence"
+
     end
 
     def congratulatory_message(player, trial, time)
       puts <<-EOS
                   *********************************************************
-                  *       Congratulation #{player.name}!!                 *
-                  *    You guessed the correct sequence '#{player.guess}' *
-                  *    in #{trial} trial(s) over #{time / 3600}hrs        *
-                  *          #{time / 60} min #{time % 60} secs."         *
+                         Congratulation #{player.name}!!
+                     You guessed the correct sequence '#{player.guess}'
+                     in #{trial} trial(s) over #{time / 3600}hrs
+                            #{time / 60} min #{time % 60} secs."
                   *********************************************************
             EOS
       puts 'Do you want to save your record? y/n'
@@ -100,7 +98,6 @@ module Lekanmastermind
     end
 
     def select_play_message
-
       puts <<-EOS
                 *************************************************
                 *       Select the mode you want.               *
