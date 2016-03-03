@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Lekanmastermind::Computer do
   subject(:computer) { Lekanmastermind::Computer.new(level) }
-  let(:level) { 'b' }
+  let(:level) { :beginner }
   # before :each do
   #   @computer = Computer.new
   # end
@@ -13,35 +13,35 @@ describe Lekanmastermind::Computer do
   end
 
   describe '#number_of_color_and_character' do
-    let(:level) { 'beginner' }
+    let(:level) { :beginner }
     it 'returns a [4,4] for the beginner level' do
       expect(computer.number_of_color_and_character).to eq([4, 4])
     end
   end
 
   describe '#number_of_color_and_character' do
-    let(:level) { 'i' }
+    let(:level) { :intermediate }
     it 'returns a [6,5] for the intermediate level' do
       expect(computer.number_of_color_and_character).to eq([6, 5])
     end
   end
 
   describe '#number_of_color_and_character' do
-    let(:level) { 'intermediate' }
+    let(:level) { :intermediate }
     it 'returns a [6,5] for the intermediate level' do
       expect(computer.number_of_color_and_character).to eq([6, 5])
     end
   end
 
   describe '#number_of_color_and_character' do
-    let(:level) { 'a' }
+    let(:level) { :advanced }
     it 'returns a [8,6] for the intermediate level' do
       expect(computer.number_of_color_and_character).to eq([8, 6])
     end
   end
 
   describe '#number_of_color_and_character' do
-    let(:level) { 'advanced' }
+    let(:level) { :advanced }
     it 'returns a [6,5] for the advanced level' do
       expect(computer.number_of_color_and_character).to eq([8, 6])
     end

@@ -6,7 +6,8 @@ module Lekanmastermind
   module GameInitializer
     include Lekanmastermind::Messages
     include Lekanmastermind::GameMethods
-
+    attr_reader :mode
+    
     def begin_game_initialize
       computer_handler = Computer.new(@game_level)
       @computer_sequence = computer_handler.computer_guess
@@ -43,13 +44,15 @@ module Lekanmastermind
     def select_level
       select_level_message
       level = gets.chomp.downcase
-      game_level(user_level)
+      game_level(level)
     end
-    def game_level(user_level)
-      case user_level
+
+    def game_level(level)
+      case level
       when 'a','advanced' then :advanced
       when 'b','beginner' then :beginner
       when 'i','intermediate' then :intermediate
+      when 'q','quit' then game_exit
       else :beginner
       end
     end
@@ -59,7 +62,7 @@ module Lekanmastermind
       mode = gets.chomp.downcase
       case mode
       when 's','single' then 'single'
-      when 'm', 'mutiplayer' then 'multiplayer'
+      when 'm', 'multiplayer' then 'multiplayer'
       when 'q', 'quit' then  game_exit
       else
         error_input_message
