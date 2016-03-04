@@ -28,18 +28,16 @@ module Lekanmastermind
       end
     end
 =end
-def top_ten(level)
-  if File.file?('scores.yaml')
-    scores = YAML.load_stream(File.open('scores.yaml','r')).select do |player|
-      player.level == level
+    def top_ten(level)
+      if File.file?('scores.yaml')
+        scores = YAML.load_stream(File.open('scores.yaml','r')).select do |player|
+          player.level == level
+        end
+        scores.sort do |player1, player2|
+          by_guess = player1.time <=> player2.time
+          by_guess == 0 ? player1.chances <=> player2.chances : by_guess
+        end[0...10]
+      end
     end
-    scores.sort do |player1, player2|
-      by_guess = player1.time <=> player2.time
-      by_guess == 0 ? player1.chances <=> player2.chances : by_guess
-    end[0...10]
   end
-end
-
-  end
-
 end

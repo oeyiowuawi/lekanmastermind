@@ -15,16 +15,20 @@ let(:two_players) { true }
       expect(subject.game_menu).to eq(nil)
     end
   end
-=begin
+
   describe '#player_input(player)' do
     it { should respond_to(:player_input) }
-    it "accepts player valid input" do
-      STDIN.stub(:noecho).and_return('rrrr')
-      allow(subject).to receive(:check_options).and_return(nil)
-      expect(subject.player_input(player1)).to eq(nil)
+    context 'valid input' do
+      it "accepts player valid input" do
+        STDIN.stub(:noecho).and_return('rrrr')
+        allow(subject).to receive(:two_players?).and_return(true)
+        allow(subject).to receive(:invalid_play).and_return(false)
+        allow(subject).to receive(:check_options).and_return(nil)
+        expect(subject.player_input(player1)).to eq(nil)
+      end
     end
   end
-=end
+
   describe '#check_options(player)' do
     it { should respond_to(:check_options) }
     context "cheat" do

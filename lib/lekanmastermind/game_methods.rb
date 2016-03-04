@@ -47,7 +47,7 @@ module Lekanmastermind
     def cheat
       puts computer_sequence
     end
-
+ 
     def invalid_play(player)
       not_letters?(player.guess) || !validate_number_of_characters(player.guess)
     end

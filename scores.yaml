@@ -46,3 +46,15 @@ guess: ioyb
 time: 120
 chances: 5
 level: :beginner
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: Lekan
+guess: ioyb
+time: 120
+chances: 5
+level: :beginner
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: Lekan
+guess: ioyb
+time: 120
+chances: 5
+level: :beginner
