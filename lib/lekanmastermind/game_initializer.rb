@@ -30,10 +30,21 @@ module Lekanmastermind
         'p' => :select_level,
         'i' => :load_instructions,
         'instruction' => :load_instructions,
-        'play' => :select_level
+        'play' => :select_level,
+        't' => :top_ten,
+        'top' => :top_ten
       }
     end
-        
+
+    def top_ten
+      level = select_level
+      FileHandler.new.print_top_scores(level)
+      go_to_menu
+      response = gets.chomp.downcase
+      game_menu if response == 'menu'
+      game_exit
+    end
+
     def load_instructions
       instructions
       response = gets.chomp.downcase
@@ -53,7 +64,9 @@ module Lekanmastermind
       when 'b', 'beginner' then :beginner
       when 'i', 'intermediate' then :intermediate
       when 'q', 'quit' then game_exit
-      else :beginner
+      else
+        error_input_message
+        select_level
       end
     end
 

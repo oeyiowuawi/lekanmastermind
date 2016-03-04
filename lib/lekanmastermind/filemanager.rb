@@ -2,23 +2,23 @@
 module Lekanmastermind
   class FileHandler
     include Messages
-    def writer(name, guess, time, chance)
+    def writer(name, guess, time, chance, level)
       player_result = Lekanmastermind::StorePlayerResult.new(
-        name, guess, time, chance)
+        name, guess, time, chance, level)
       File.open('scores.yaml', 'a') do |file|
         file.write(YAML.dump(player_result))
       end
     end
 
-    def print_top_scores
-      if top_ten
+    def print_top_scores(level)
+      if top_ten(level)
         top_ten_message
-        top_ten.each_with_index { |player, index| puts "#{index + 1} #{player}" }
+        top_ten(level).each_with_index { |player, index| puts "#{index + 1} #{player}" }
       else
         puts 'No Records yet!!'
       end
     end
-
+=begin
     def top_ten
       if File.file?('scores.yaml')
         YAML.load_stream(File.open('scores.yaml','r')).sort do |player1, player2|
@@ -27,5 +27,19 @@ module Lekanmastermind
         end[0...10]
       end
     end
+=end
+def top_ten(level)
+  if File.file?('scores.yaml')
+    scores = YAML.load_stream(File.open('scores.yaml','r')).select do |player|
+      player.level == level
+    end
+    scores.sort do |player1, player2|
+      by_guess = player1.time <=> player2.time
+      by_guess == 0 ? player1.chances <=> player2.chances : by_guess
+    end[0...10]
   end
+end
+
+  end
+
 end

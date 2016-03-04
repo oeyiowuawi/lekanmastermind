@@ -5,12 +5,12 @@ module Lekanmastermind
 
       puts <<-EOS
                *************************************************
-               *           Welcome to mastermind               *
-               *                                               *
-               *       Press p(lay) to start a new game        *
-               *       Press (i)nstruction to load a saved game*
-               *       Press (q)uit to quit the game at anytime*
-               *                                               *
+               *           Welcome to mastermind                *
+               *                                                *
+               *       Press p(lay) to start a new game         *
+               *       Press (i)nstruction to load a saved game *
+               *       Press (t)op to view Top scores           *
+               *       Press (q)uit to quit the game at anytime *
                *************************************************
           EOS
       print '>'
@@ -69,7 +69,10 @@ module Lekanmastermind
           colors from the following colors: #{comp_handler.colours_for_level}
           To enter a sequence,
           Enter just the first letters of your  color sequence"
+    end
 
+    def go_to_menu
+      puts "Enter menu to back to the menu"
     end
 
     def congratulatory_message(player, trial, time)

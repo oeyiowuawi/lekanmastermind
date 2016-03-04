@@ -67,9 +67,9 @@ module Lekanmastermind
       time_elapsed = (end_time - @start_time).to_i
       congratulatory_message(player, chances, time_elapsed)
       if yes_or_no?
-        @file_handler.writer(player.name, player.guess, time_elapsed, chances)
+        @file_handler.writer(player.name, player.guess, time_elapsed, chances, @game_level)
       end
-      @file_handler.print_top_scores
+      @file_handler.print_top_scores(@game_level)
       replay
     end
 

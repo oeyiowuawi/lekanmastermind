@@ -6,10 +6,11 @@ describe Lekanmastermind::FileHandler do
     let(:guess) {'ioyb'}
     let(:time) {120}
     let(:chance) {5}
-    let(:player_result) {Lekanmastermind::StorePlayerResult.new(name, guess, time, chance)}
+    let(:level) {:beginner}
+    let(:player_result) {Lekanmastermind::StorePlayerResult.new(name, guess, time, chance,level)}
     it "should save to yaml" do
       YAML.stub(:writer).with('whatever.yaml').and_return(YAML.dump(player_result))
-      expect(file_handle.writer(name, guess,time, chance)).to eq(97) # number of bytes that write method returns
+      expect(file_handle.writer(name, guess,time, chance, level)).to eq(114) # number of bytes that write method returns
     end
   end
 =begin

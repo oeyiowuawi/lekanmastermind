@@ -4,12 +4,14 @@ module Lekanmastermind
     attr_reader :guess
     attr_reader :time
     attr_reader :chances
+    attr_reader :level
 
-    def initialize(name, guess, time, chances)
+    def initialize(name, guess, time, chances, level)
       @name = name
       @guess = guess
       @time = time
       @chances = chances
+      @level = level
     end
 
     def to_s
