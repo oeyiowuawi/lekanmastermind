@@ -8,7 +8,7 @@ module Lekanmastermind
     include Lekanmastermind::Messages
     include Lekanmastermind::GameInitializer
     include Lekanmastermind::GameMethods
-    attr_reader :computer_sequence
+    attr_accessor :computer_sequence
 
     def game_menu
       welcome_msg

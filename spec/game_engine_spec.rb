@@ -6,8 +6,6 @@ let(:two_players) { true }
     it "begins game" do
       allow(subject).to receive(:puts).and_return(nil)
       allow(subject).to receive(:gets).and_return('play')
-      #@game_level = :beginner
-      #@mode = 'single'
       allow(subject).to receive(:init_player).and_return(nil)
       allow(subject).to receive(:player_action).and_return(nil)
       allow(subject).to receive(:load_mode).and_return(nil)
@@ -30,10 +28,11 @@ let(:two_players) { true }
   end
 
   describe '#check_options(player)' do
+    let(:computer_sequence) {'rrbo'}
     it { should respond_to(:check_options) }
     context "cheat" do
       it "prints out cheat" do
-        allow(subject).to receive(:computer_sequence).and_return('rrbo')
+        #allow(subject).to receive(:computer_sequence).and_return('rrbo')
         allow(player1).to receive(:guess).and_return('c')
         allow(subject).to receive(:puts).and_return('rrbo')
         expect(subject.check_options(player1)).to eq('rrbo')
@@ -73,7 +72,6 @@ let(:two_players) { true }
   end
   describe '#winning_player(player, chances)' do
     let(:chances) {2}
-    #it { should respond_to(:winning_player) }
     context 'win' do
       it 'checks if a player wins' do
         allow(subject).to receive(:player_input).and_return('rrby')
@@ -91,20 +89,21 @@ let(:two_players) { true }
       end
     end
   end
-=begin
+
   describe '#process_guess(player, chances)?' do
     let(:chances) {5}
     let(:player) {Lekanmastermind::Players.new('lekan')}
-    let(:computer_sequence) {'rrbo'}
     it { should respond_to(:process_guess) }
     it "should process the computer guess and the player guess" do
       allow(player).to receive(:guess).and_return('rryo')
-      allow(subject).to receive(:puts).and_return(nil)
-      require 'pry'; binding.pry
+      allow(subject).to receive(:guess_process_message).and_return(nil)
+      allow(subject).to receive(:computer_sequence).and_return('rrbo')
+      allow(subject).to receive(:exacts).and_return(nil)
+      allow(subject).to receive(:partials).and_return(nil)
       expect(subject.process_guess(player,5)).to eq(nil)
     end
   end
-=end
+
   describe '#exacts(combined_guesses)' do
     let(:combined_guesses) {[['r','r'],["b","b"],['r','y'],['y','b']]}
     it { should respond_to(:exacts) }
