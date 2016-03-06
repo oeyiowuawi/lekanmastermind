@@ -67,13 +67,13 @@ module Lekanmastermind
 
     def level_welcome(level, comp_handler)
       <<-EOS
-             ***************************************************************
-             *  You are playing the #{level} level. You can choose         *
-             *  #{comp_handler.number_of_character} colors                 *
-             * from the following colors: #{comp_handler.colours_for_level}*
-             * To enter a sequence, Enter just the first letters of your   *
-             *              color sequence                                 *
-             ***************************************************************
+        ***************************************************************
+       *  You are playing the #{level} level. You can choose         *
+       *  #{comp_handler.number_of_character} colors                 *
+       * from the following colors: #{comp_handler.colours_for_level}*
+       * To enter a sequence, Enter just the first letters of your   *
+       *              color sequence                                 *
+       ***************************************************************
       EOS
     end
 
@@ -81,7 +81,7 @@ module Lekanmastermind
       "Enter menu to back to the menu"
     end
 
-    def congratulatory_message(player, trial, time)
+    def congratulation(player, trial, time)
       <<-EOS
              *********************************************************
                      Congratulation #{player.name}!!
@@ -94,6 +94,10 @@ module Lekanmastermind
 
     def save_record
       'Do you want to save your record? y/n'
+    end
+
+    def view_top_scores
+      'Do you want to view top scores? y/n'
     end
 
     def replay_option
@@ -109,8 +113,8 @@ module Lekanmastermind
       EOS
     end
 
-    def top_ten_message
-      puts '========= TOP TEN ========='
+    def top_ten
+      '========= TOP TEN ========='
     end
 
     def select_play_message

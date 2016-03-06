@@ -1,6 +1,6 @@
 module Lekanmastermind
   module GameMethods
-    include Lekanmastermind::Messages
+    #include Lekanmastermind::Messages
     def yes_or_no?
       loop do
         input = gets.chomp

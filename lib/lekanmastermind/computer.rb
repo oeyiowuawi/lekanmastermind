@@ -4,12 +4,12 @@ module Lekanmastermind
     def initialize(level)
       @number_of_colors = level[1]
       @number_of_character = level[0]
+      colors = %w(Red Blue Green Yellow Orange Indigo Violet Cyan Purple)
+      @level_color = colors.shuffle[0...@number_of_colors]
     end
 
     def colours_for_level
-      colors = %w(Red Blue Green Yellow Orange Indigo Violet Cyan Purple)
-      level_color =|| colors.shuffle[0...@number_of_colors]
-
+      @level_color
     end
 
     def generate_color_index

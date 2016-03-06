@@ -1,6 +1,9 @@
-require 'lib/Lekanmastermind/computer'
-require 'lib/Lekanmastermind/game_engine'
+require 'Lekanmastermind/computer'
+require 'Lekanmastermind/game_engine'
+require 'set_player'
+require 'extra_methods'
 class Logic
+  include ExtraMethods
   def initialize(message, level)
     @player_level = level[0]
     @message = message
@@ -12,11 +15,13 @@ class Logic
   end
 
   def start_game
-    player_collection = @setplayer.player_collection
-    puts level_welcome(@player_level, @comp_handler)
+    players = @set_player.player_collection
+
+    puts @message.level_welcome(@player_level, @comp_handler)
+    begin_game(players)
   end
 
-  def begin_game(level_details, players)
+  def begin_game(players)
     chances = 1
     start_time = (Time.now).to_i
     while chances < 13
@@ -42,12 +47,14 @@ class Logic
 
   def file_operations(player, chances, time_elapsed)
       puts @message.save_record
-      reply = gets.chomp
       if yes_or_no?
-        @file_handler.writer(player, time_elapsed, chances, @game_level)
+        @file_handler.writer(player, time_elapsed, chances, @player_level)
       end
       puts @message.view_top_scores
-      puts @file_handler.print_top_scores(@player_level) if yes_or_no?
+      if yes_or_no?
+        puts @message.top_ten
+        puts @file_handler.print_top_scores(@player_level)
+      end
       replay
   end
 
@@ -56,7 +63,7 @@ class Logic
       puts "Enter your guess #{player.name}"
       player.guess = gets.chomp
       check_options(player)
-      break unless @logic.invalid_play(player)
+      break unless @game_engine.invalid_play(player)
     end
   end
 

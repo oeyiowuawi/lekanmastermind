@@ -1,12 +1,13 @@
 require 'extra_methods'
-require 'lib/lekanmastermind'
+require 'lekanmastermind/messages'
+require 'lekanmastermind/filemanager'
 require_relative 'logic'
 class Cli
   include ExtraMethods
   def initialize
     @message = Lekanmastermind::Messages.new
-    @logic = Logic.new(@message)
-    @file_handler = FileHandler.new
+    #@logic = Logic.new(@message)
+    @file_handler = Lekanmastermind::FileHandler.new
   end
 
   def welcome
@@ -15,7 +16,7 @@ class Cli
     process_input(input)
   end
 
-  def process_input
+  def process_input(input)
     case input
     when 'q', 'quit' then game_exit
     when 'p', 'play'  then play

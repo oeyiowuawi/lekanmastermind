@@ -130,3 +130,27 @@ guess: ioyb
 time: 120
 chances: 5
 level: beginner
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: laztopaz
+guess: oobo
+time: 41
+chances: 1
+level:
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: olalekan
+guess: ccpo
+time: 16
+chances: 2
+level:
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: olalekan
+guess: rvvvbg
+time: 0
+chances: 1
+level: intermediate
+--- !ruby/object:Lekanmastermind::StorePlayerResult
+name: boss
+guess: cooocg
+time: 12
+chances: 1
+level: intermediate

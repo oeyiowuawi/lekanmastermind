@@ -4,7 +4,7 @@ require_relative 'player'
 
 module Lekanmastermind
   module GameInitializer
-    include Lekanmastermind::Messages
+    #include Lekanmastermind::Messages
     include Lekanmastermind::GameMethods
     attr_reader :mode
     def begin_game_initialize
