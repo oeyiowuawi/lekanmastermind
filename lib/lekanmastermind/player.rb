@@ -1,6 +1,6 @@
 module Lekanmastermind
   class Players
-    attr_accessor :name, :guess
+    attr_accessor :name, :guess, :history
     def initialize(name)
       @name = name
       @history = []
@@ -11,12 +11,12 @@ module Lekanmastermind
       @history << [guess, result]
     end
 
-    def show_history
-      if !@history.empty?
-        @history.each { |guess, result| puts "#{guess} -- #{result}" }
-      else
-        puts 'You have no guess history'
-      end
-    end
+    # def show_history
+    #   if !@history.empty?
+    #     @history #.each { |guess, result| puts "#{guess} -- #{result}" }
+    #   else
+    #      'You have no guess history'
+    #   end
+    # end
   end
 end

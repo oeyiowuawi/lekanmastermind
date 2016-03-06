@@ -5,11 +5,13 @@ require_relative 'game_methods'
 require_relative 'game_initializer'
 module Lekanmastermind
   class GameEngine
-    include Lekanmastermind::Messages
-    include Lekanmastermind::GameInitializer
-    include Lekanmastermind::GameMethods
     attr_accessor :computer_sequence
-
+    def initialize(sequence,message)
+      #computer_handler = Computer.new(level)
+      @message = message
+      @computer_sequence = sequence
+    end
+=begin
     def game_menu
       welcome_msg
       action = gets.chomp
@@ -18,7 +20,6 @@ module Lekanmastermind
       init_player
       begin_game
     end
-
     def player_input(player)
       loop do
         enter_input_guess(player.name)
@@ -28,15 +29,10 @@ module Lekanmastermind
       end
     end
 
-    def check_options(player)
-      case player.guess
-      when 'c', 'C' then cheat
-      when 'q', 'Q' then game_exit
-      when 'h', 'H' then print_history(player)
-      else input_length_check(player.guess)
-      end
-    end
+=end
 
+
+=begin
     def begin_game
       begin_game_initialize
       @start_time = Time.now
@@ -61,7 +57,6 @@ module Lekanmastermind
         process_guess(player, chances)
       end
     end
-
     def congratulation(chances, player)
       end_time = Time.now
       time_elapsed = (end_time - @start_time).to_i
@@ -73,6 +68,27 @@ module Lekanmastermind
       replay
     end
 
+    def check_options(player)
+      case player.guess
+      when 'c', 'C' then cheat
+      when 'q', 'Q' then game_exit
+      when 'h', 'H' then print_history(player)
+      else input_length_check(player.guess)
+      end
+    end
+=end
+
+    def print_history(player)
+      player.history.empty? ? "No history right now" : player.history
+    end
+
+    def won?(player)
+      player.guess == computer_sequence
+    end
+
+    def cheat
+       computer_sequence
+    end
     def process_guess(player, chances)
       guess = player.guess.split('')
       comp = computer_sequence.split('')
@@ -80,7 +96,8 @@ module Lekanmastermind
       exact_numb = exacts(combined_guesses)
       partial_numb = partials(combined_guesses)
       player.save_guess(guess.join, exact_numb, partial_numb)
-      guess_process_message(guess.join, exact_numb, partial_numb, chances)
+      @message.guess_process_message(guess.join, exact_numb,
+                                      partial_numb, chances)
     end
 
     def exacts(combined_guesses)
@@ -103,5 +120,42 @@ module Lekanmastermind
       end
       partial_match.size
     end
+=begin
+    def game_exit
+      goodbye_message
+      system(exit)
+    end
+
+    def out_of_chance
+      out_of_chance_msg
+      replay
+    end
+=end
+    def input_length_check(guess)
+      character_count = computer_sequence.length
+      if guess.length > character_count
+         "Your guess is longer than the required length(#{character_count})"
+      elsif guess.length < computer_sequence.length
+         "Your guess is shorter than the required length(#{character_count})"
+      end
+    end
+
+    def invalid_play(player)
+      not_letters?(player.guess) || !validate_number_of_characters(player.guess)
+    end
+
+    def not_letters?(guess)
+      trimmed_guess = guess.strip
+      true if /[^a-z]/ =~ trimmed_guess
+    end
+
+    def comp_number_characters
+      computer_sequence.length
+    end
+
+    def validate_number_of_characters(guess)
+      guess.length == comp_number_characters
+    end
+
   end
 end

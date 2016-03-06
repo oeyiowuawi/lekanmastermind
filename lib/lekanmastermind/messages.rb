@@ -1,54 +1,56 @@
 module Lekanmastermind
-  module Messages
-    def welcome_msg
-      puts 'Welcome to mastermind. Would you like to (p)lay, read the (i)nstructions or (q)uit?'
-
-      puts <<-EOS
+  class Messages
+    def welcome
+       <<-EOS
                *************************************************
-               *           Welcome to mastermind                *
-               *                                                *
-               *       Press p(lay) to start a new game         *
-               *       Press (i)nstruction to load a saved game *
-               *       Press (t)op to view Top scores           *
-               *       Press (q)uit to quit the game at anytime *
+               *          Welcome to mastermind                *
+               *                                               *
+               *      Press p(lay) to start a new game         *
+               *      Press (i)nstruction to load a saved game *
+               *      Press (t)op to view Top scores           *
+               *      Press (q)uit to quit the game at anytime *
+               *      >                                        *
                *************************************************
-          EOS
-      print '>'
+        EOS
     end
 
     def instructions
-    puts <<-EOS
+      <<-EOS
                **************************************************
                *      This is MASTERMIND game v0.1.0            *
                *            By Olalekan Eyiowuawi               *
                *      Enjoy and expect the next version         *
                *      Press q at anytime to quit the game.      *
-               *      Enter your level and play mode            *
-               *   b - beginner, i - intermediate, a - advanced *
+               *      Enter your level and number of players    *
+               *      beginner, intermediate, advanced          *
                *   To view guess history, enter h at any time   *
-               *      when the game starts                      *
+               *         when the game starts                   *
                *      Press Menu to go back to the menu.        *
                **************************************************
-        EOS
+      EOS
     end
 
-    def error_input_message
-    puts <<-EOS
-                ************************************************************************
-                * You've entered an invalid letter. Read the instruction and try again *
-                ************************************************************************
-        EOS
+    def error_input
+      <<-EOS
+        ************************************************************************
+        * You've entered an invalid letter. Read the instruction and try again *
+        ************************************************************************
+      EOS
     end
 
-    def select_level_message
-    puts <<-EOS
-                *********************************************************
-                *       Select Your preferred level of difficulty       *
-                *          Enter b  for beginner                        *
-                *          Enter i for intermediate                     *
-                *          Enter a  for advance                         *
-                *********************************************************
-          EOS
+    def select_level
+      <<-EOS
+             *********************************************************
+             *       Select Your preferred level of difficulty       *
+             *          Enter 1  for beginner                        *
+             *          Enter 2 for intermediate                     *
+             *          Enter 3  for advance                         *
+             *********************************************************
+      EOS
+    end
+
+    def number_of_players
+      'Enter the number of players'
     end
 
     def prompt_for_player1_name_message
@@ -63,37 +65,48 @@ module Lekanmastermind
       puts "Enter your guess #{player_name}"
     end
 
-    def level_welcome_message(comp_handler)
-      puts "You are playing the #{comp_handler.level} level.
-          You can choose #{comp_handler.number_of_color_and_character[0]}
-          colors from the following colors: #{comp_handler.colours_for_level}
-          To enter a sequence,
-          Enter just the first letters of your  color sequence"
+    def level_welcome(level, comp_handler)
+      <<-EOS
+             ***************************************************************
+             *  You are playing the #{level} level. You can choose         *
+             *  #{comp_handler.number_of_character} colors                 *
+             * from the following colors: #{comp_handler.colours_for_level}*
+             * To enter a sequence, Enter just the first letters of your   *
+             *              color sequence                                 *
+             ***************************************************************
+      EOS
     end
 
     def go_to_menu
-      puts "Enter menu to back to the menu"
+      "Enter menu to back to the menu"
     end
 
     def congratulatory_message(player, trial, time)
-      puts <<-EOS
-                  *********************************************************
-                         Congratulation #{player.name}!!
-                     You guessed the correct sequence '#{player.guess}'
-                     in #{trial} trial(s) over #{time / 3600}hrs
-                            #{time / 60} min #{time % 60} secs."
-                  *********************************************************
-            EOS
-      puts 'Do you want to save your record? y/n'
+      <<-EOS
+             *********************************************************
+                     Congratulation #{player.name}!!
+                 You guessed the correct sequence '#{player.guess}'
+                   in #{trial} trial(s) over #{time / 3600}hrs
+                        #{time / 60} min #{time % 60} secs.
+            *********************************************************
+      EOS
     end
 
-    def replay_option_message
-      puts 'Do you want to play again? Press Y or N'
+    def save_record
+      'Do you want to save your record? y/n'
+    end
+
+    def replay_option
+      'Do you want to play again? Press Y or N'
     end
 
     def guess_process_message(guess, exact, partial, chances)
-      puts "'#{guess.upcase}' has #{exact} exacts and #{partial} partials"
-      puts "#{12 - chances} chances left"
+      <<-EOS
+        ************************************************************************
+        * '#{guess.upcase}' has #{exact} exacts and #{partial} partials        *
+        *            #{12 - chances} chances left                              *
+        ************************************************************************
+      EOS
     end
 
     def top_ten_message

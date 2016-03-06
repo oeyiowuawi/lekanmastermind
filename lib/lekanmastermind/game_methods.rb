@@ -36,6 +36,7 @@ module Lekanmastermind
       end
     end
 
+=begin
     def print_history(player)
       player.show_history
     end
@@ -43,11 +44,10 @@ module Lekanmastermind
     def won?(player)
       player.guess == computer_sequence
     end
-
     def cheat
       puts computer_sequence
     end
- 
+=end
     def invalid_play(player)
       not_letters?(player.guess) || !validate_number_of_characters(player.guess)
     end
