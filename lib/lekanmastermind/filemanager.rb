@@ -1,7 +1,6 @@
 
 module Lekanmastermind
   class FileHandler
-    #include Messages
     def writer(player, time, chance, level)
       player_result = Lekanmastermind::StorePlayerResult.new(
         player.name, player.guess, time, chance, level)
@@ -12,7 +11,6 @@ module Lekanmastermind
 
     def print_top_scores(level)
       if top_ten(level)
-        # top_ten_message
         top_ten(level).each_with_index { |player, index|  "#{index + 1} #{player}" }
       else
          'No Records yet!!'

@@ -64,6 +64,7 @@ class Logic
       player.guess = gets.chomp
       check_options(player)
       break unless @game_engine.invalid_play(player)
+      puts @message.error_input
     end
   end
 

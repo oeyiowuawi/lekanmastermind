@@ -72,12 +72,12 @@ class Cli
 
   def top_ten
     level = select_level
-    puts @file_handler.print_top_scores(level)
+    puts @file_handler.print_top_scores(level[0])
     loop do
-      puts go_to_menu
+      puts @message.go_to_menu
       response = gets.chomp.downcase
       break if response == 'menu'
     end
-      game_menu
+      welcome
   end
 end
