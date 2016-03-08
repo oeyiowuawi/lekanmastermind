@@ -154,3 +154,15 @@ guess: cooocg
 time: 12
 chances: 1
 level: intermediate
+--- !ruby/object:Lekanmastermind::PlayerResult
+name: debare
+guess: vgcicb
+time: 8
+chances: 1
+level: intermediate
+--- !ruby/object:Lekanmastermind::PlayerResult
+name: pope
+guess: igii
+time: 4
+chances: 1
+level: beginner

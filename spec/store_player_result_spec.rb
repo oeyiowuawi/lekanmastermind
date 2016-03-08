@@ -1,43 +1,22 @@
 require 'spec_helper'
 
 describe Lekanmastermind::StorePlayerResult do
-  subject(:store_player_result) { Lekanmastermind::StorePlayerResult.new(name, guess, time, chances, level) }
+  subject { Lekanmastermind::StorePlayerResult.new(name, guess, time, chances, level) }
   let(:name) { 'lekan' }
-  let(:guess) { 'RRBY' }
+  let(:guess) { 'RRGOBY' }
   let(:time) { 123 }
   let(:chances) { 6 }
-  let(:level) {:beginner}
+  let(:level) {'intermediate'}
 
   describe '#new' do
-    it 'return name which is a string' do
-      expect(store_player_result.name).to be_a(String)
-    end
-  end
-
-  describe '#new' do
-    it 'return guess which is a string' do
-      expect(store_player_result.guess).to be_a(String)
-    end
-  end
-
-  describe '#new' do
-    it 'return time which is a Number' do
-      expect(store_player_result.time).to be_a(Fixnum)
-    end
-  end
-
-  describe '#new' do
-    it 'return chances which is a Number' do
-      expect(store_player_result.chances).to be_a(Fixnum)
-    end
-  end
-  describe '#new' do
-    it 'return chances which is a Number' do
-      expect(store_player_result.level).to be_a Symbol
-    end
+    it{ expect(subject.name).to be_a(String) }
+    it { expect(subject.guess).to be_a(String) }
+    it { expect(subject.time).to be_a(Fixnum) }
+    it { expect(subject.chances).to be_a(Fixnum) }
+    it { expect(subject.level).to be_a String }
   end
 
   describe 'to_s' do
-    it { should respond_to(:to_s) }
+    it { expect(subject.to_s).to be_a(String) }
   end
 end

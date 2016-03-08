@@ -1,8 +1,7 @@
 
 # This class controls all the logic in the game
 # it checks the guesses againt computer's and return the appropriate response
-require_relative 'game_methods'
-require_relative 'game_initializer'
+
 module Lekanmastermind
   class GameEngine
     attr_accessor :computer_sequence
@@ -22,14 +21,17 @@ module Lekanmastermind
     def cheat
        computer_sequence
     end
-    def process_guess(player, chances)
+    def combined_guesses(player)
       guess = player.guess.split('')
       comp = computer_sequence.split('')
       combined_guesses = comp.zip(guess)
+    end
+    def process_guess(player, chances)
+      combined_guesses = combined_guesses(player)
       exact_numb = exacts(combined_guesses)
       partial_numb = partials(combined_guesses)
-      player.save_guess(guess.join, exact_numb, partial_numb)
-      @message.guess_process_message(guess.join, exact_numb,
+      player.save_guess(player.guess, exact_numb, partial_numb)
+      @message.guess_process_message(player.guess, exact_numb,
                                       partial_numb, chances)
     end
 

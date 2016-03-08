@@ -12,3 +12,4 @@ Coveralls.wear!
 require 'rspec'
 
 require 'lekanmastermind'
+require 'game_start'

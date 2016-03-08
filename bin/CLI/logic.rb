@@ -16,7 +16,7 @@ class Logic
 
   def start_game
     players = @set_player.player_collection
-
+    @players_count = players.count
     puts @message.level_welcome(@player_level, @comp_handler)
     begin_game(players)
   end
@@ -51,20 +51,23 @@ class Logic
         @file_handler.writer(player, time_elapsed, chances, @player_level)
       end
       puts @message.view_top_scores
-      if yes_or_no?
-        puts @message.top_ten
-        puts @file_handler.print_top_scores(@player_level)
-      end
+      show_top_score
       replay
+  end
+
+  def show_top_score
+    if yes_or_no?
+      puts @message.top_ten
+      puts @file_handler.print_top_scores(@player_level)
+    end
   end
 
   def check_input(player)
     loop do
       puts "Enter your guess #{player.name}"
-      player.guess = gets.chomp
+      player.guess = @players_count > 1 ? STDIN.noecho(&:gets).chomp: gets.chomp
       check_options(player)
       break unless @game_engine.invalid_play(player)
-      puts @message.error_input
     end
   end
 
@@ -83,7 +86,7 @@ class Logic
       case input.downcase
       when 'y', 'yes' then return true
       when 'no', 'n' then return false
-      else @message.error_input_message
+      else puts @message.error_input
       end
     end
   end
@@ -92,9 +95,9 @@ class Logic
     puts @message.replay_option
     yes_or_no? ? Cli.new.welcome : game_exit
   end
+
   def out_of_chance
-    @message.out_of_chance_msg
+    puts @message.out_of_chance
     replay
   end
-
 end

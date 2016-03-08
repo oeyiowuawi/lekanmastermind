@@ -1,6 +1,6 @@
 module ExtraMethods
   def game_exit
-    @message.goodbye_message
+    puts @message.goodbye
     system(exit)
   end
 end

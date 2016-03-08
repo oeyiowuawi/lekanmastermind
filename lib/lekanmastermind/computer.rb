@@ -1,31 +1,24 @@
 module Lekanmastermind
   class Computer
-    attr_accessor :number_of_colors, :number_of_character
-    def initialize(level)
-      @number_of_colors = level[1]
-      @number_of_character = level[0]
+    attr_reader :number_of_colors, :number_of_character, :level_colors
+    def initialize(num_of_colors:, num_of_char:)
+      @number_of_colors = num_of_colors
+      @number_of_character = num_of_char
       colors = %w(Red Blue Green Yellow Orange Indigo Violet Cyan Purple)
-      @level_color = colors.shuffle[0...@number_of_colors]
-    end
-
-    def colours_for_level
-      @level_color
-    end
-
-    def generate_color_index
-      color_index = []
-      @number_of_character.times do
-        color_index << Random.new.rand(@number_of_colors)
-      end
-      color_index
+      @level_colors = colors.shuffle[0...@number_of_colors]
     end
 
     def computer_guess
-      computer_color = ''
-      generate_color_index.each do |index|
-        computer_color << colours_for_level[index][0]
+      computer_colors = ''
+      number_of_character.times do
+        computer_colors << random_colour_char
       end
-      computer_color.downcase
+      computer_colors.downcase
+    end
+
+    def random_colour_char
+      colour_index = Random.new.rand(number_of_colors)
+      @level_colors[colour_index][0]
     end
   end
 end

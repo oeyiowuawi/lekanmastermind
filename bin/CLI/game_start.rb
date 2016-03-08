@@ -1,12 +1,11 @@
-require 'extra_methods'
-require 'lekanmastermind/messages'
-require 'lekanmastermind/filemanager'
-require_relative 'logic'
+# require 'extra_methods'
+# require 'lekanmastermind/messages'
+# require 'lekanmastermind/filemanager'
+ require_relative 'logic'
 class Cli
   include ExtraMethods
   def initialize
     @message = Lekanmastermind::Messages.new
-    #@logic = Logic.new(@message)
     @file_handler = Lekanmastermind::FileHandler.new
   end
 
@@ -17,15 +16,21 @@ class Cli
   end
 
   def process_input(input)
-    case input
-    when 'q', 'quit' then game_exit
-    when 'p', 'play'  then play
-    when 'i', 'instruction' then load_instructions
-    when 't', 'top' then top_ten
+    if game_option.include? input
+      send(game_option[input])
     else
       puts @message.error_input
       welcome
     end
+  end
+
+  def game_option
+    {
+      'quit' => :game_exit, 'q' => :game_exit,
+      'play' => :play, 'p' => :play,
+      'instruction' => :load_instructions, 'i' => :load_instructions,
+      'top' => :top_ten, 't' => :top_ten
+    }
   end
 
   def load_instructions
@@ -51,24 +56,22 @@ class Cli
     process_level(input)
   end
 
- def process_level(input)
-   if supported_level.include? input
-     [input, supported_level[input]]
-   else
-     puts @message.error_input
-     select_level
-   end
- end
+  def process_level(input)
+    if supported_level.include? input
+      [input, supported_level[input]]
+    else
+      puts @message.error_input
+      select_level
+    end
+  end
 
-
- def supported_level
-   {
-      'beginner' => [4,4],
-      'advanced' => [8,6],
-      'intermediate' => [6,5]
-   }
- end
-
+  def supported_level
+    {
+      'beginner' => {num_of_colors: 4, num_of_char: 4},#[4,4],
+      'advanced' => {num_of_colors: 6, num_of_char: 8},#[8,6],
+      'intermediate' => {num_of_colors: 5, num_of_char: 6},#[6,5]
+    }
+  end
 
   def top_ten
     level = select_level
@@ -78,6 +81,6 @@ class Cli
       response = gets.chomp.downcase
       break if response == 'menu'
     end
-      welcome
+    welcome
   end
 end

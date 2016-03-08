@@ -8,7 +8,7 @@ class SetPlayer
       puts @message.number_of_players
       @number_of_players = gets.chomp
       break if check_input(@number_of_players)
-      @message.error_input
+      puts @message.error_input
     end
     generate_players(@number_of_players)
 

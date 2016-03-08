@@ -1,5 +1,5 @@
 module Lekanmastermind
-  class StorePlayerResult
+  class PlayerResult
     attr_reader :name
     attr_reader :guess
     attr_reader :time

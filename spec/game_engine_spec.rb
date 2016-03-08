@@ -1,130 +1,82 @@
 require 'spec_helper'
 describe Lekanmastermind::GameEngine do
-let(:player1) { Lekanmastermind::Players.new('lekan') }
-let(:two_players) { true }
-  describe '#game_menu' do
-    it "begins game" do
-      allow(subject).to receive(:puts).and_return(nil)
-      allow(subject).to receive(:gets).and_return('play')
-      allow(subject).to receive(:init_player).and_return(nil)
-      allow(subject).to receive(:player_action).and_return(nil)
-      allow(subject).to receive(:load_mode).and_return(nil)
-      allow(subject).to receive(:begin_game).and_return(nil)
-      expect(subject.game_menu).to eq(nil)
+subject { Lekanmastermind::GameEngine.new('rrby', message) }
+let(:message) {Lekanmastermind::Messages.new}
+let(:player) { Lekanmastermind::Players.new('lekan') }
+#let(:combined_guesses) {[['r','r'],['r','b'],['b','y'],['y','b']]}
+
+  describe '#print_history' do
+    it 'prints a message when History is empty' do
+      allow(player).to receive(:history).and_return([])
+      expect(subject.print_history(player)).to eq("No history right now")
     end
   end
 
-  describe '#player_input(player)' do
-    it { should respond_to(:player_input) }
-    context 'valid input' do
-      it "accepts player valid input" do
-        STDIN.stub(:noecho).and_return('rrrr')
-        allow(subject).to receive(:two_players?).and_return(true)
-        allow(subject).to receive(:invalid_play).and_return(false)
-        allow(subject).to receive(:check_options).and_return(nil)
-        expect(subject.player_input(player1)).to eq(nil)
-      end
+  describe '#won?' do
+    it 'returns true when player gets the correct sequence' do
+      allow(player).to receive(:guess).and_return('rrby')
+      expect(subject.won?(player)).to eq(true)
     end
   end
 
-  describe '#check_options(player)' do
-    let(:computer_sequence) {'rrbo'}
-    it { should respond_to(:check_options) }
-    context "cheat" do
-      it "prints out cheat" do
-        #allow(subject).to receive(:computer_sequence).and_return('rrbo')
-        allow(player1).to receive(:guess).and_return('c')
-        allow(subject).to receive(:puts).and_return('rrbo')
-        expect(subject.check_options(player1)).to eq('rrbo')
-      end
-    end
-    context 'quit' do
-      it "quits the game" do
-        allow(player1).to receive(:guess).and_return('q')
-        allow(subject).to receive(:game_exit).and_return(nil)
-        expect(subject.check_options(player1)).to eq(nil)
-      end
-    end
-    context 'history' do
-      it "prints Hitory" do
-        allow(player1).to receive(:guess).and_return('H')
-        allow(subject).to receive(:print_history).and_return(nil)
-        expect(subject.check_options(player1)).to eq(nil)
-      end
-    end
-    context 'error' do
-      it "prints the appropriate error message depending on the length of the input" do
-        allow(player1).to receive(:guess).and_return('z')
-        allow(subject).to receive(:input_length_check).and_return(nil)
-        expect(subject.check_options(player1)).to eq(nil)
-      end
-    end
+  describe '#cheat' do
+    it{ expect(subject.cheat).to eq('rrby') }
   end
-  describe '#player_check(chances)' do
-    let(:chances) {3}
-    #it { should respond_to(:player_check) }
-    context 'check guess' do
-      it "checks players guesses" do
-        allow(subject).to receive(:winning_player).and_return(nil)
-        expect(subject.player_check(chances)).to eq(nil)
-      end
-    end
-  end
-  describe '#winning_player(player, chances)' do
-    let(:chances) {2}
-    context 'win' do
-      it 'checks if a player wins' do
-        allow(subject).to receive(:player_input).and_return('rrby')
-        allow(subject).to receive(:won?).and_return(true)
-        allow(subject).to receive(:congratulation).and_return(nil)
-        expect(subject.winning_player(player1, chances)).to eq(nil)
-      end
-    end
-    context 'process guess' do
-      it "process a player's guess" do
-        allow(subject).to receive(:player_input).and_return('rrby')
-        allow(subject).to receive(:won?).and_return(false)
-        allow(subject).to receive(:process_guess).and_return(nil)
-        expect(subject.winning_player(player1, chances)).to eq(nil)
-      end
+  describe '#combined_guesses' do
+    it do
+      allow(player).to receive(:guess).and_return('rbyb')
+      expect(subject.combined_guesses(player)).to eq([['r','r'],['r','b'],['b','y'],['y','b']])
     end
   end
 
-  describe '#process_guess(player, chances)?' do
-    let(:chances) {5}
-    let(:player) {Lekanmastermind::Players.new('lekan')}
-    it { should respond_to(:process_guess) }
-    it "should process the computer guess and the player guess" do
-      allow(player).to receive(:guess).and_return('rryo')
-      allow(subject).to receive(:guess_process_message).and_return(nil)
-      allow(subject).to receive(:computer_sequence).and_return('rrbo')
+  describe '#process_guess' do
+    let(:chances) {4}
+    it do
+      allow(subject).to receive(:combined_guesses).and_return(nil)
+      allow(player).to receive(:guess).and_return('rbyb')
       allow(subject).to receive(:exacts).and_return(nil)
       allow(subject).to receive(:partials).and_return(nil)
-      expect(subject.process_guess(player,5)).to eq(nil)
+      allow(player).to receive(:save_guess).and_return(nil)
+      allow(message).to receive(:guess_process_message).and_return(nil)
+      expect(subject.process_guess(player,chances)).to eq(nil)
     end
-  end
 
-  describe '#exacts(combined_guesses)' do
-    let(:combined_guesses) {[['r','r'],["b","b"],['r','y'],['y','b']]}
-    it { should respond_to(:exacts) }
-    context 'exact' do
-      it "returns 2 as exact matches" do
-        expect(subject.exacts(combined_guesses)).to eq(2)
+    describe '#exacts' do
+      let(:combined_guesses) {[['r','r'],['r','b'],['b','y'],['y','b']]}
+      it do
+        expect(subject.exacts(combined_guesses)).to eq(1)
       end
     end
-  end
-  describe '#partials(combined_guesses)' do
-    let(:combined_guesses) {[['r','r'],["b","b"],['r','y'],['y','b']]}
-    it { should respond_to(:partials) }
-    context 'partial' do
-      it "returns 1 as partial match" do
-        expect(subject.partials(combined_guesses)).to eq(1)
+    describe '#partials' do
+      let(:combined_guesses) {[['r','r'],['r','b'],['b','y'],['y','b']]}
+      it do
+        expect(subject.partials(combined_guesses)).to eq(2)
       end
     end
-  end
-
-  describe '#calculate_partials(computer_guess, player_guess, partial_match)' do
-    it { should respond_to(:calculate_partials) }
+    describe '#input_length_check' do
+      context 'short input' do
+        let(:guess) {'rby'}
+        it{ expect(subject.input_length_check(guess)).to include("guess is shorter")}
+      end
+      context 'long input' do
+        let(:guess) {'rbyyy'}
+        it{ expect(subject.input_length_check(guess)).to include("guess is longer")}
+      end
+    end
+    describe '#invalid_play' do
+      it do
+        allow(subject).to receive(:not_letters?).and_return(false)
+        allow(subject).to receive(:validate_number_of_characters).and_return(true)
+        expect(subject.invalid_play(player)).to eq(false)
+      end
+    end
+    describe '#comp_number_characters' do
+      it{ expect(subject.comp_number_characters).to eq(4)}
+    end
+    describe '#validate_number_of_characters' do
+      let(:guess) {'rbyo'}
+      it {expect(subject.validate_number_of_characters(guess)).to eq(true)}
+    end
   end
 
 end

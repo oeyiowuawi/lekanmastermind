@@ -11,7 +11,7 @@ module Lekanmastermind
                *      Press (q)uit to quit the game at anytime *
                *      >                                        *
                *************************************************
-        EOS
+      EOS
     end
 
     def instructions
@@ -42,9 +42,9 @@ module Lekanmastermind
       <<-EOS
              *********************************************************
              *       Select Your preferred level of difficulty       *
-             *          Enter 1  for beginner                        *
-             *          Enter 2 for intermediate                     *
-             *          Enter 3  for advance                         *
+             *          Enter 'beginner' for beginner level          *
+             *          Enter 'intermediate' for intermediate        *
+             *          Enter 'advanced'  for advanced level         *
              *********************************************************
       EOS
     end
@@ -53,27 +53,14 @@ module Lekanmastermind
       'Enter the number of players'
     end
 
-    def prompt_for_player1_name_message
-      puts 'Enter your name'
-    end
-
-    def prompt_for_player2_name_message
-      puts 'Player two,Enter your name'
-    end
-
-    def enter_input_guess(player_name)
-      puts "Enter your guess #{player_name}"
-    end
-
     def level_welcome(level, comp_handler)
       <<-EOS
-        ***************************************************************
-       *  You are playing the #{level} level. You can choose         *
-       *  #{comp_handler.number_of_character} colors                 *
-       * from the following colors: #{comp_handler.colours_for_level}*
-       * To enter a sequence, Enter just the first letters of your   *
-       *              color sequence                                 *
-       ***************************************************************
+          *********************************************************************
+              You are playing the #{level} level. You can choose
+            #{comp_handler.number_of_character} colors from the following colors
+              #{comp_handler.level_colors} To enter a sequence,
+                   Enter just the first letters of your color sequence
+          ***********************************************************************
       EOS
     end
 
@@ -106,10 +93,10 @@ module Lekanmastermind
 
     def guess_process_message(guess, exact, partial, chances)
       <<-EOS
-        ************************************************************************
-        * '#{guess.upcase}' has #{exact} exacts and #{partial} partials        *
-        *            #{12 - chances} chances left                              *
-        ************************************************************************
+           *****************************************************************
+            '#{guess.upcase}' has #{exact} exacts and #{partial} partials
+                  #{12 - chances} chances left
+           *****************************************************************
       EOS
     end
 
@@ -117,22 +104,12 @@ module Lekanmastermind
       '========= TOP TEN ========='
     end
 
-    def select_play_message
-      puts <<-EOS
-                *************************************************
-                *       Select the mode you want.               *
-                *       (s)ingle for single mode                *
-                *       (m)ultiplayer for two                   *
-                *************************************************
-           EOS
+    def out_of_chance
+      "GAME OVER!! You're out of Trials!"
     end
 
-    def out_of_chance_msg
-      puts "GAME OVER!! You're out of Trials!"
-    end
-
-    def goodbye_message
-      puts 'Thanks for playing Master Mind. See you soon'
+    def goodbye
+      'Thanks for playing Master Mind. See you soon'
     end
   end
 end
