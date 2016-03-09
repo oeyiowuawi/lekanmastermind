@@ -74,7 +74,7 @@ describe Cli do
       it do
         input = "advanced"
         allow(subject).to receive(:play).and_return(true)
-        expect(subject.process_level(input)).to eq(['advanced',[8,6]])
+        expect(subject.process_level(input)).to eq(['advanced',{:num_of_colors=>6, :num_of_char=>8}])
       end
     end
     context 'wrong input' do
@@ -88,6 +88,12 @@ describe Cli do
   end
   describe '#supported_level'do
     it{ expect(subject.game_option).to be_a Hash}
+  end
+  describe "#game_exit" do
+    it do
+      allow(subject).to receive(:puts).and_return(nil)
+      expect{subject.game_exit}.to raise_error SystemExit
+    end
   end
 
   describe '#top_ten' do

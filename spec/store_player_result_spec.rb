@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Lekanmastermind::StorePlayerResult do
-  subject { Lekanmastermind::StorePlayerResult.new(name, guess, time, chances, level) }
+describe Lekanmastermind::PlayerResult do
+  subject { Lekanmastermind::PlayerResult.new(name, guess, time, chances, level) }
   let(:name) { 'lekan' }
   let(:guess) { 'RRGOBY' }
   let(:time) { 123 }

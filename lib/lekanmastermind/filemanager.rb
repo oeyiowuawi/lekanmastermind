@@ -1,9 +1,9 @@
 require 'yaml'
 module Lekanmastermind
   class FileHandler
-    def writer(player, time, chance, level)
+    def writer(name, guess, time, chance, level)
       player_result = Lekanmastermind::PlayerResult.new(
-        player.name, player.guess, time, chance, level)
+        name, guess, time, chance, level)
       File.open('scores.yaml', 'a') do |file|
         file.write(YAML.dump(player_result))
       end

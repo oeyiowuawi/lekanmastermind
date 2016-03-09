@@ -48,7 +48,7 @@ class Logic
   def file_operations(player, chances, time_elapsed)
       puts @message.save_record
       if yes_or_no?
-        @file_handler.writer(player, time_elapsed, chances, @player_level)
+        @file_handler.writer(player.name, player.guess, time_elapsed, chances, @player_level)
       end
       puts @message.view_top_scores
       show_top_score

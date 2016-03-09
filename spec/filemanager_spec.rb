@@ -2,17 +2,17 @@ require 'spec_helper'
 describe Lekanmastermind::FileHandler do
   subject(:file_handle) {Lekanmastermind::FileHandler.new}
   context '#writer' do
-    let(:player) {Lekanmastermind::Players.new('lekan')}
+    #let(:player) {Lekanmastermind::Players.new('lekan')}
     let(:name) {'Lekan'}
-    let(:guess) {'RRBY'}
-    let(:time) {120}
-    let(:chance) {5}
-    let(:level) {'beginner'}
-    let(:player_result) {Lekanmastermind::PlayerResult.new(player.name, guess, time, chance,level)}
+    let(:guess) {'RRBYIO'}
+    let(:time) {146}
+    let(:chance) {2}
+    let(:level) {'intermediate'}
+    let(:player_result) {Lekanmastermind::PlayerResult.new(name, guess, time, chance,level)}
     it "should save to yaml" do
       #require 'pry'; binding.pry
       YAML.stub(:writer).with('whatever.yaml').and_return(YAML.dump(player_result))
-      expect(file_handle.writer(player ,time, chance, level)).to eq(113) # number of bytes that write method returns
+      expect(file_handle.writer(name, guess,time, chance, level)).to eq(114) # number of bytes that write method returns
     end
   end
 =begin
@@ -24,7 +24,6 @@ describe Lekanmastermind::FileHandler do
       end
     end
 =end
-
 
 
 end
