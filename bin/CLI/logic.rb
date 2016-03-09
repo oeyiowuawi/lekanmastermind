@@ -1,7 +1,7 @@
 require 'Lekanmastermind/computer'
 require 'Lekanmastermind/game_engine'
-require 'set_player'
-require 'extra_methods'
+require_relative 'set_player'
+require_relative 'extra_methods'
 class Logic
   include ExtraMethods
   def initialize(message, level)
