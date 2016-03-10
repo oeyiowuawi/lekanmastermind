@@ -65,7 +65,7 @@ class Logic
   def check_input(player)
     loop do
       puts "Enter your guess #{player.name}"
-      player.guess = @players_count > 1 ? STDIN.noecho(&:gets).chomp: gets.chomp
+      player.guess = @players_count >1 ? STDIN.noecho(&:gets).chomp : gets.chomp
       check_options(player)
       break unless @game_engine.invalid_play(player)
     end

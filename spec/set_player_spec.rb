@@ -7,6 +7,7 @@ describe SetPlayer do
     it do
       allow(subject).to receive(:puts).and_return(nil)
       allow(subject).to receive(:gets).and_return('2')
+      allow(subject).to receive(:check_input).and_return(false,true)
       allow(subject).to receive(:generate_players).and_return(nil)
       expect(subject.player_collection).to eq(nil)
     end

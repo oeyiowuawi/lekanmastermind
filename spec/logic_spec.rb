@@ -4,32 +4,20 @@ describe Logic do
   let(:message) {Lekanmastermind::Messages.new}
   let(:set_player) {SetPlayer.new(message)}
   let(:player) {Lekanmastermind::Players.new('lekan')}
+  let(:player2) {Lekanmastermind::Players.new('lateef')}
   let(:game_engine) {Lekanmastermind::GameEngine.new('RRBY',message)}
-=begin
-  describe '#start_game' do
-    #let(:players_count) {2}
-    it do
-      allow(set_player).to receive(:player_collection).and_return(nil)
-      allow(subject).to receive(:puts).and_return(nil)
-      allow(subject).to receive(:begin_game).and_return(nil)
-      expect(subject.start_game).to eq(nil)
-    end
-  end
 
 
-describe '#check_input' do
-  #let(:players_count)  { 2 }
+
+describe 'begin_game' do
+  let(:players) {[player,player2]}
   it do
-    @players_count = 2
-    allow(subject).to receive(:puts).and_return(nil)
-    STDIN.stub(:noecho).and_return('rrrr')
-    #require 'pry'; binding.pry
-    allow(subject).to receive(:check_options).and_return(nil)
-    allow(@game_engine).to receive(:invalid_play).and_return(false)
-    expect(subject.check_input(player)).to eq(nil)
+    allow(subject).to receive(:check_input).and_return(nil)
+    allow(subject).to receive(:check_guess).and_return(nil)
+    allow(subject).to receive(:out_of_chance).and_return(nil)
+    expect(subject.begin_game(players)).to eq(nil)
   end
 end
-=end
 
 describe '#file_operations' do
   let(:time_elapsed) {120}
@@ -48,7 +36,10 @@ end
 
 =begin
 describe '#check_guess' do
-  it do
+  let(:game_engine) {Lekanmastermind::GameEngine.new('RRBY',message)}
+  let(:chances) {12}
+  let(:start_time) { 1457489567 }
+  it "congratulates a player "do
     allow(game_engine).to receive(:won?).and_return(true)
     allow(game_engine).to receive(:process_guess).and_return(nil)
     allow(subject).to receive(:puts).and_return(nil)

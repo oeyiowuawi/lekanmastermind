@@ -44,7 +44,7 @@ describe Cli do
   describe 'load_instructions' do
     it do
       allow(subject).to receive(:puts).and_return(nil)
-      allow(subject).to receive(:gets).and_return('menu')
+      allow(subject).to receive(:gets).and_return('menu','menu')
       allow(subject).to receive(:welcome).and_return(nil)
       expect(subject.load_instructions).to eq(nil)
     end

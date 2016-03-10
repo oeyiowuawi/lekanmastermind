@@ -3,7 +3,7 @@ describe Lekanmastermind::GameEngine do
 subject { Lekanmastermind::GameEngine.new('rrby', message) }
 let(:message) {Lekanmastermind::Messages.new}
 let(:player) { Lekanmastermind::Players.new('lekan') }
-#let(:combined_guesses) {[['r','r'],['r','b'],['b','y'],['y','b']]}
+
 
   describe '#print_history' do
     it 'prints a message when History is empty' do
@@ -17,6 +17,10 @@ let(:player) { Lekanmastermind::Players.new('lekan') }
       allow(player).to receive(:guess).and_return('rrby')
       expect(subject.won?(player)).to eq(true)
     end
+  end
+
+  describe '#not_letters'do
+    it{expect(subject.not_letters?("1bcd")).to eq(true)}
   end
 
   describe '#cheat' do
