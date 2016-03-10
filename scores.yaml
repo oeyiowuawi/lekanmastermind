@@ -256,3 +256,15 @@ guess: rrvy
 time: 120
 chances: 5
 level: beginner
+--- !ruby/object:Lekanmastermind::PlayerResult
+name: Lekan
+guess: RRBYIO
+time: 146
+chances: 2
+level: intermediate
+--- !ruby/object:Lekanmastermind::PlayerResult
+name: lekan
+guess: rrvy
+time: 120
+chances: 5
+level: beginner
