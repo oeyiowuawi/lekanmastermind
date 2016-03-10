@@ -1,5 +1,5 @@
-require_relative 'lib/lekanmastermind/computer'
-require_relative 'lib/lekanmastermind/game_engine'
+require 'lekanmastermind/computer'
+require 'lekanmastermind/game_engine'
 require_relative 'set_player'
 require_relative 'extra_methods'
 class Logic
