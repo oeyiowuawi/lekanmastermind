@@ -1,4 +1,3 @@
-
 # This class controls all the logic in the game
 # it checks the guesses againt computer's and return the appropriate response
 

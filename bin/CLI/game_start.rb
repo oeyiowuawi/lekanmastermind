@@ -1,7 +1,4 @@
-# require 'extra_methods'
-# require 'lekanmastermind/messages'
-# require 'lekanmastermind/filemanager'
- require_relative 'logic'
+require_relative 'logic'
 class Cli
   include ExtraMethods
   def initialize

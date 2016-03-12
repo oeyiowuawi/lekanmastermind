@@ -11,7 +11,6 @@ class SetPlayer
       puts @message.error_input
     end
     generate_players(@number_of_players)
-
   end
 
   def check_input(input)

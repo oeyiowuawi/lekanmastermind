@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe Lekanmastermind::Computer do
-  subject { Lekanmastermind::Computer.new({num_of_colors: 6,num_of_char: 8}) }
 
+
+  subject { Lekanmastermind::Computer.new(num_of_colors: 6,num_of_char: 8) }
   describe '#level_colors' do
     it{ expect(subject.level_colors.length).to eq(6) }
   end

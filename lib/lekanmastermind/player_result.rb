@@ -1,10 +1,6 @@
 module Lekanmastermind
   class PlayerResult
-    attr_reader :name
-    attr_reader :guess
-    attr_reader :time
-    attr_reader :chances
-    attr_reader :level
+    attr_reader :name, :guess, :time, :chances, :level
 
     def initialize(name, guess, time, chances, level)
       @name = name
