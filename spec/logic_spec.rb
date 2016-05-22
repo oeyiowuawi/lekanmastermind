@@ -34,26 +34,10 @@ describe '#file_operations' do
 
 end
 
-=begin
-describe '#check_guess' do
-  let(:game_engine) {Lekanmastermind::GameEngine.new('RRBY',message)}
-  let(:chances) {12}
-  let(:start_time) { 1457489567 }
-  it "congratulates a player "do
-    allow(game_engine).to receive(:won?).and_return(true)
-    allow(game_engine).to receive(:process_guess).and_return(nil)
-    allow(subject).to receive(:puts).and_return(nil)
-    allow(subject).to receive(:file_operations).and_return(nil)
-    expect(subject.check_guess(player,12,1457489567)).to eq(nil)
-  end
-
-end
-=end
 describe '#show_top_score' do
   it do
     allow(subject).to receive(:yes_or_no?).and_return(true)
     allow(subject).to receive(:puts).and_return(nil)
-    #allow(subject).to receive(:yes_or_no?).and_return(false)
     expect(subject.show_top_score).to eq(nil)
   end
 
